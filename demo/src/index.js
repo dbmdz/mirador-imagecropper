@@ -1,15 +1,26 @@
-import React, {Component} from 'react'
-import {render} from 'react-dom'
+import Mirador from 'mirador/dist/es/src/index';
 
-import Example from '../../src'
+import imageCropperPlugin from '../../src';
 
-export default class Demo extends Component {
-  render() {
-    return <div>
-      <h1>mirador-imagecropper Demo</h1>
-      <Example/>
-    </div>
-  }
-}
+const config = {
+  catalog: [
+    { manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00135902/manifest', provider: 'Bavarian State Library' },
+    { manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb10532463_00005_u001/manifest', provider: 'Bavarian State Library' },
+    { manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00034024/manifest', provider: 'Bavarian State Library' },
+  ],
+  id: 'demo',
+  window: {
+    imageCropper: {
+      enabled: true,
+    },
+  },
+  windows: [{
+    canvasIndex: 8,
+    manifestId: 'https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00034024/manifest',
+    view: 'single',
+  }],
+};
 
-render(<Demo/>, document.querySelector('#demo'))
+Mirador.viewer(config, [
+  ...imageCropperPlugin
+]);
