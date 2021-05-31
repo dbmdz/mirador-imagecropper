@@ -16,10 +16,13 @@
     "sourceType": "module"
   },
   "plugins": [
-    "react"
+    "react",
+    "simple-import-sort"
   ],
   "rules": {
     "import/prefer-default-export": "off",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   }
 }
