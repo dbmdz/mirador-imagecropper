@@ -1,5 +1,5 @@
-import { getWindowConfig } from 'mirador/dist/es/src/state/selectors';
-import { createSelector } from 'reselect';
+import { getWindowConfig } from "mirador/dist/es/src/state/selectors";
+import { createSelector } from "reselect";
 
 const defaultConfig = {
   // Activate the image cropping overlay
