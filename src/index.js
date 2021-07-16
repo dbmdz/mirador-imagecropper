@@ -28,7 +28,12 @@ export default [
     config: {
       translations,
     },
+    mapDispatchToProps: (dispatch, { windowId }) => ({
+      updateOptions: (options) =>
+        dispatch(updateWindow(windowId, { imageCropper: options })),
+    }),
     mapStateToProps: (state, { windowId }) => ({
+      containerId: getContainerId(state),
       options: getWindowImageCropperOptions(state, { windowId }),
     }),
     mode: "add",

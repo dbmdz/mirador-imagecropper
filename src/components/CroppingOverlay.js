@@ -1,6 +1,6 @@
-import IconButton from "@material-ui/core/IconButton";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ShareIcon from "@material-ui/icons/Share";
+import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { Rnd } from "react-rnd";
@@ -23,7 +23,14 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CroppingOverlay = ({ options: { active, enabled }, viewer }) => {
+const CroppingOverlay = ({
+  containerId,
+  options,
+  t,
+  updateOptions,
+  viewer,
+}) => {
+  const { active, dialogOpen, enabled } = options;
   const [position, setPosition] = useState({
     left: 720,
     top: 108,
@@ -71,18 +78,32 @@ const CroppingOverlay = ({ options: { active, enabled }, viewer }) => {
         width: size.width,
       }}
     >
-      <IconButton variant="outlined">
+      <MiradorMenuButton
+        aria-expanded={dialogOpen}
+        aria-label={t("imageCropper.openDialog")}
+        containerId={containerId}
+        onClick={() =>
+          updateOptions({
+            ...options,
+            dialogOpen: true,
+          })
+        }
+      >
         <ShareIcon color="white" />
-      </IconButton>
+      </MiradorMenuButton>
     </Rnd>
   );
 };
 
 CroppingOverlay.propTypes = {
+  containerId: PropTypes.string.isRequired,
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
+    dialogOpen: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
+  t: PropTypes.func.isRequired,
+  updateOptions: PropTypes.func.isRequired,
   viewer: PropTypes.object, // eslint-disable-line react/forbid-prop-types
 };
 
