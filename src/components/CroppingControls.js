@@ -13,7 +13,7 @@ const CroppingControls = ({ containerId, options, t, updateOptions }) => {
       aria-expanded={active}
       aria-haspopup
       aria-label={
-        active ? t("deactivateImageCropping") : t("activateImageCropping")
+        active ? t("imageCropper.deactivate") : t("imageCropper.activate")
       }
       color={active ? "primary" : ""}
       containerId={containerId}
