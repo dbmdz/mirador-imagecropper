@@ -8,6 +8,8 @@ const defaultConfig = {
   dialogOpen: false,
   // Enable the image cropping feature
   enabled: true,
+  // Show the rights information defined in the manifest
+  showRightsInformation: true,
 };
 
 /** Selector to get text display options for a given window */
