@@ -29,6 +29,7 @@ const CroppingOverlay = ({
   t,
   updateOptions,
   viewer,
+  viewType,
 }) => {
   const { active, dialogOpen, enabled } = options;
   const [position, setPosition] = useState({
@@ -40,7 +41,7 @@ const CroppingOverlay = ({
     width: 400,
   });
   const { resizeHandle, root } = useStyles();
-  if (!enabled || !active || !viewer) {
+  if (!enabled || !active || !viewer || viewType !== "single") {
     return null;
   }
   const ResizeHandle = <div className={resizeHandle} />;
@@ -105,6 +106,7 @@ CroppingOverlay.propTypes = {
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
   viewer: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  viewType: PropTypes.string.isRequired,
 };
 
 CroppingOverlay.defaultProps = {

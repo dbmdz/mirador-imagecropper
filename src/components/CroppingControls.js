@@ -3,9 +3,15 @@ import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuBut
 import PropTypes from "prop-types";
 import React from "react";
 
-const CroppingControls = ({ containerId, options, t, updateOptions }) => {
+const CroppingControls = ({
+  containerId,
+  options,
+  t,
+  updateOptions,
+  viewType,
+}) => {
   const { active, enabled } = options;
-  if (!enabled) {
+  if (!enabled || viewType !== "single") {
     return null;
   }
   return (
@@ -37,6 +43,7 @@ CroppingControls.propTypes = {
   }).isRequired,
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
+  viewType: PropTypes.string.isRequired,
 };
 
 export default CroppingControls;
