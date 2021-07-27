@@ -50,6 +50,7 @@ const CroppingDialog = ({
   rights,
   t,
   updateOptions,
+  viewType,
 }) => {
   const { active, dialogOpen, enabled, showRightsInformation } = options;
   const inputRef = useRef();
@@ -58,7 +59,13 @@ const CroppingDialog = ({
   const [size, setSize] = useState(100);
   const { optionsHeading, previewHeading, previewImage, previewLink } =
     useStyles();
-  if (!enabled || !active || !dialogOpen || !currentCanvas) {
+  if (
+    !enabled ||
+    !active ||
+    !dialogOpen ||
+    !currentCanvas ||
+    viewType !== "single"
+  ) {
     return null;
   }
   const closeDialog = () =>
@@ -214,6 +221,7 @@ CroppingDialog.propTypes = {
   rights: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
+  viewType: PropTypes.string.isRequired,
 };
 
 CroppingDialog.defaultProps = {

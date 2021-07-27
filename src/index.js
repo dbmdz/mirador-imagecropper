@@ -4,6 +4,7 @@ import {
   getCurrentCanvas,
   getRequiredStatement,
   getRights,
+  getWindowViewType,
 } from "mirador/dist/es/src/state/selectors";
 
 import CroppingControls from "./components/CroppingControls";
@@ -25,6 +26,7 @@ export default [
     mapStateToProps: (state, { windowId }) => ({
       containerId: getContainerId(state),
       options: getWindowImageCropperOptions(state, { windowId }),
+      viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
     target: "WindowTopBarPluginArea",
@@ -44,6 +46,7 @@ export default [
       options: getWindowImageCropperOptions(state, { windowId }),
       requiredStatement: getRequiredStatement(state, { windowId }),
       rights: getRights(state, { windowId }),
+      viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
     target: "Window",
@@ -60,6 +63,7 @@ export default [
     mapStateToProps: (state, { windowId }) => ({
       containerId: getContainerId(state),
       options: getWindowImageCropperOptions(state, { windowId }),
+      viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
     target: "OpenSeadragonViewer",
