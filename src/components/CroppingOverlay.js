@@ -1,9 +1,24 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ShareIcon from "@material-ui/icons/Share";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
+import { Point } from "openseadragon";
 import PropTypes from "prop-types";
 import React from "react";
 import { Rnd } from "react-rnd";
+
+const isInsideImage = (image, width, height, { x, y, w, h }) => {
+  const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
+  const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
+  const bottomLeft = image.imageToViewerElementCoordinates(
+    new Point(0, height)
+  );
+  return (
+    x >= topLeft.x &&
+    y >= topLeft.y &&
+    x + w <= topRight.x &&
+    y + h <= bottomLeft.y
+  );
+};
 
 const useStyles = makeStyles(() => ({
   resizeHandle: {
@@ -26,6 +41,7 @@ const useStyles = makeStyles(() => ({
 const CroppingOverlay = ({
   containerId,
   croppingRegion,
+  currentCanvas,
   options,
   setCroppingRegion,
   t,
@@ -35,9 +51,18 @@ const CroppingOverlay = ({
 }) => {
   const { active, dialogOpen, enabled } = options;
   const { resizeHandle, root } = useStyles();
-  if (!enabled || !active || !viewer || viewType !== "single") {
+  if (
+    !enabled ||
+    !active ||
+    !viewer ||
+    !currentCanvas ||
+    viewType !== "single"
+  ) {
     return null;
   }
+  const canvasWidth = currentCanvas.getWidth();
+  const canvasHeight = currentCanvas.getHeight();
+  const currentImage = viewer.world.getItemAt(0);
   const ResizeHandle = <div className={resizeHandle} />;
   return (
     <Rnd
@@ -45,14 +70,30 @@ const CroppingOverlay = ({
       className={root}
       minHeight={50}
       minWidth={50}
-      onDrag={(_evt, { x, y }) => setCroppingRegion({ x, y })}
+      onDrag={(_evt, { x, y }) => {
+        if (
+          isInsideImage(currentImage, canvasWidth, canvasHeight, {
+            ...croppingRegion,
+            x,
+            y,
+          })
+        ) {
+          setCroppingRegion({ x, y });
+        }
+      }}
       onResize={(
         _evt,
         _dir,
         { offsetHeight: h, offsetWidth: w },
         _delta,
         { x, y }
-      ) => setCroppingRegion({ x, y, w, h })}
+      ) => {
+        if (
+          isInsideImage(currentImage, canvasWidth, canvasHeight, { x, y, w, h })
+        ) {
+          setCroppingRegion({ x, y, w, h });
+        }
+      }}
       position={{
         x: croppingRegion.x,
         y: croppingRegion.y,
@@ -92,6 +133,10 @@ CroppingOverlay.propTypes = {
     y: PropTypes.number,
     w: PropTypes.number,
     h: PropTypes.number,
+  }).isRequired,
+  currentCanvas: PropTypes.shape({
+    getHeight: PropTypes.func.isRequired,
+    getWidth: PropTypes.func.isRequired,
   }).isRequired,
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
