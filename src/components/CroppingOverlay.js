@@ -2,7 +2,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import ShareIcon from "@material-ui/icons/Share";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import React from "react";
 import { Rnd } from "react-rnd";
 
 const useStyles = makeStyles(() => ({
@@ -25,21 +25,15 @@ const useStyles = makeStyles(() => ({
 
 const CroppingOverlay = ({
   containerId,
+  croppingRegion,
   options,
+  setCroppingRegion,
   t,
   updateOptions,
   viewer,
   viewType,
 }) => {
   const { active, dialogOpen, enabled } = options;
-  const [position, setPosition] = useState({
-    left: 720,
-    top: 108,
-  });
-  const [size, setSize] = useState({
-    height: 300,
-    width: 400,
-  });
   const { resizeHandle, root } = useStyles();
   if (!enabled || !active || !viewer || viewType !== "single") {
     return null;
@@ -51,22 +45,17 @@ const CroppingOverlay = ({
       className={root}
       minHeight={50}
       minWidth={50}
-      onDrag={(_evt, { x, y }) => {
-        setPosition({ left: x, top: y });
-      }}
+      onDrag={(_evt, { x, y }) => setCroppingRegion({ x, y })}
       onResize={(
         _evt,
         _dir,
-        { offsetHeight, offsetWidth },
+        { offsetHeight: h, offsetWidth: w },
         _delta,
         { x, y }
-      ) => {
-        setPosition({ left: x, top: y });
-        setSize({ height: offsetHeight, width: offsetWidth });
-      }}
+      ) => setCroppingRegion({ x, y, w, h })}
       position={{
-        x: position.left,
-        y: position.top,
+        x: croppingRegion.x,
+        y: croppingRegion.y,
       }}
       resizeHandleComponent={{
         bottomLeft: ResizeHandle,
@@ -75,8 +64,8 @@ const CroppingOverlay = ({
         topRight: ResizeHandle,
       }}
       size={{
-        height: size.height,
-        width: size.width,
+        height: croppingRegion.h,
+        width: croppingRegion.w,
       }}
     >
       <MiradorMenuButton
@@ -98,11 +87,18 @@ const CroppingOverlay = ({
 
 CroppingOverlay.propTypes = {
   containerId: PropTypes.string.isRequired,
+  croppingRegion: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+    w: PropTypes.number,
+    h: PropTypes.number,
+  }).isRequired,
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
     dialogOpen: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
+  setCroppingRegion: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
   viewer: PropTypes.object, // eslint-disable-line react/forbid-prop-types

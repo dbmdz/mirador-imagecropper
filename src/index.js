@@ -11,7 +11,13 @@ import CroppingControls from "./components/CroppingControls";
 import CroppingDialog from "./components/CroppingDialog";
 import CroppingOverlay from "./components/CroppingOverlay";
 import translations from "./locales";
-import { getWindowImageCropperOptions } from "./state/selectors";
+import { setCroppingRegion } from "./state/actions";
+import { croppingRegionsReducer } from "./state/reducers";
+import croppingRegionSaga from "./state/sagas";
+import {
+  getCroppingRegionForWindow,
+  getWindowImageCropperOptions,
+} from "./state/selectors";
 
 export default [
   {
@@ -57,15 +63,23 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
+      setCroppingRegion: (region) => {
+        dispatch(setCroppingRegion(windowId, region));
+      },
       updateOptions: (options) =>
         dispatch(updateWindow(windowId, { imageCropper: options })),
     }),
     mapStateToProps: (state, { windowId }) => ({
       containerId: getContainerId(state),
+      croppingRegion: getCroppingRegionForWindow(state, { windowId }),
       options: getWindowImageCropperOptions(state, { windowId }),
       viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
+    reducers: {
+      croppingRegions: croppingRegionsReducer,
+    },
+    saga: croppingRegionSaga,
     target: "OpenSeadragonViewer",
   },
 ];
