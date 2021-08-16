@@ -39,6 +39,18 @@ const isInsideImage = (bounds, { x, y, w, h }) => {
   );
 };
 
+const toImageCoordinates = (image, { x, y, w, h }) => {
+  const topLeft = image.viewerElementToImageCoordinates(new Point(x, y));
+  const topRight = image.viewerElementToImageCoordinates(new Point(x + w, y));
+  const bottomLeft = image.viewerElementToImageCoordinates(new Point(x, y + h));
+  return {
+    x: Math.ceil(topLeft.x),
+    y: Math.ceil(topLeft.y),
+    w: Math.floor(topRight.x - topLeft.x),
+    h: Math.floor(bottomLeft.y - topLeft.y),
+  };
+};
+
 const useStyles = makeStyles(() => ({
   resizeHandle: {
     border: "2px solid gray",
@@ -144,12 +156,15 @@ const CroppingOverlay = ({
         aria-expanded={dialogOpen}
         aria-label={t("imageCropper.openDialog")}
         containerId={containerId}
-        onClick={() =>
+        onClick={() => {
+          setCroppingRegion({
+            imageCoordinates: toImageCoordinates(currentImage, croppingRegion),
+          });
           updateOptions({
             ...options,
             dialogOpen: true,
-          })
-        }
+          });
+        }}
       >
         <ShareIcon color="white" />
       </MiradorMenuButton>
