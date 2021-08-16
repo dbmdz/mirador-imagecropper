@@ -101,6 +101,8 @@ const CroppingDialog = ({
   const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${rotation}/${quality}.jpg`;
   const getPreviewUrl = (width) =>
     `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${rotation}/${quality}.jpg`;
+  const aspectRatio =
+    imageCoordinates.h > 0 ? imageCoordinates.w / imageCoordinates.h : 1;
   return (
     <Dialog
       fullWidth
@@ -201,7 +203,11 @@ const CroppingDialog = ({
         >
           {t("imageCropper.preview.link")}
         </Link>
-        <Image className={previewImage} src={getPreviewUrl(500)} />
+        <Image
+          aspectRatio={aspectRatio}
+          className={previewImage}
+          src={getPreviewUrl(500)}
+        />
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
       </ScrollIndicatedDialogContent>
       <DialogActions>
