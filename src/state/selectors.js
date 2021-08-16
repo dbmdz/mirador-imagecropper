@@ -14,10 +14,10 @@ const defaultConfig = {
 };
 
 export const defaultRegion = {
-  x: 720,
-  y: 108,
-  w: 400,
-  h: 300,
+  x: 0,
+  y: 0,
+  w: 0,
+  h: 0,
 };
 
 /** Selector to get the current cropping region for a given window */
