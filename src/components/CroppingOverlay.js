@@ -6,17 +6,36 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Rnd } from "react-rnd";
 
-const isInsideImage = (image, width, height, { x, y, w, h }) => {
+const getImageBounds = (image, width, height) => {
   const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
   const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
   const bottomLeft = image.imageToViewerElementCoordinates(
     new Point(0, height)
   );
+  return {
+    x: Math.ceil(topLeft.x),
+    y: Math.ceil(topLeft.y),
+    w: Math.floor(topRight.x - topLeft.x),
+    h: Math.floor(bottomLeft.y - topLeft.y),
+  };
+};
+
+const getIntialRegion = (image, width, height) => {
+  const { x, y, w, h } = getImageBounds(image, width, height);
+  return {
+    x: Math.ceil(x + w / 4),
+    y: Math.ceil(y + h / 4),
+    w: Math.floor(w / 2),
+    h: Math.floor(h / 2),
+  };
+};
+
+const isInsideImage = (bounds, { x, y, w, h }) => {
   return (
-    x >= topLeft.x &&
-    y >= topLeft.y &&
-    x + w <= topRight.x &&
-    y + h <= bottomLeft.y
+    x >= bounds.x &&
+    y >= bounds.y &&
+    x + w <= bounds.x + bounds.w &&
+    y + h <= bounds.y + bounds.h
   );
 };
 
@@ -63,6 +82,10 @@ const CroppingOverlay = ({
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
   const currentImage = viewer.world.getItemAt(0);
+  // set intial region on whole image
+  if (currentImage && Object.values(croppingRegion).every((c) => c === 0)) {
+    setCroppingRegion(getIntialRegion(currentImage, canvasWidth, canvasHeight));
+  }
   const ResizeHandle = <div className={resizeHandle} />;
   return (
     <Rnd
@@ -71,8 +94,13 @@ const CroppingOverlay = ({
       minHeight={50}
       minWidth={50}
       onDrag={(_evt, { x, y }) => {
+        const imageBounds = getImageBounds(
+          currentImage,
+          canvasWidth,
+          canvasHeight
+        );
         if (
-          isInsideImage(currentImage, canvasWidth, canvasHeight, {
+          isInsideImage(imageBounds, {
             ...croppingRegion,
             x,
             y,
@@ -88,9 +116,12 @@ const CroppingOverlay = ({
         _delta,
         { x, y }
       ) => {
-        if (
-          isInsideImage(currentImage, canvasWidth, canvasHeight, { x, y, w, h })
-        ) {
+        const imageBounds = getImageBounds(
+          currentImage,
+          canvasWidth,
+          canvasHeight
+        );
+        if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });
         }
       }}
