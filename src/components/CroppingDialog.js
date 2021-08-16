@@ -239,14 +239,14 @@ CroppingDialog.propTypes = {
       y: PropTypes.number,
       w: PropTypes.number,
       h: PropTypes.number,
-    }).isRequired,
+    }),
   }).isRequired,
   currentCanvas: PropTypes.shape({
     getHeight: PropTypes.func.isRequired,
     getWidth: PropTypes.func.isRequired,
     imageServiceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-  label: PropTypes.string.isRequired,
+  }),
+  label: PropTypes.string,
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
     dialogOpen: PropTypes.bool.isRequired,
@@ -266,6 +266,8 @@ CroppingDialog.propTypes = {
 };
 
 CroppingDialog.defaultProps = {
+  currentCanvas: undefined,
+  label: "",
   requiredStatement: [],
   rights: [],
 };

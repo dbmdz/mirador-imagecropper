@@ -183,7 +183,7 @@ CroppingOverlay.propTypes = {
   currentCanvas: PropTypes.shape({
     getHeight: PropTypes.func.isRequired,
     getWidth: PropTypes.func.isRequired,
-  }).isRequired,
+  }),
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
     dialogOpen: PropTypes.bool.isRequired,
@@ -197,6 +197,7 @@ CroppingOverlay.propTypes = {
 };
 
 CroppingOverlay.defaultProps = {
+  currentCanvas: undefined,
   viewer: undefined,
 };
 
