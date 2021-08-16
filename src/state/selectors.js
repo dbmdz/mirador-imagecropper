@@ -9,6 +9,8 @@ const defaultConfig = {
   dialogOpen: false,
   // Enable the image cropping feature
   enabled: true,
+  // Define the rounding percision for the relative coordinates
+  roundingPrecision: 5,
   // Show the rights information defined in the manifest
   showRightsInformation: true,
 };
@@ -29,8 +31,19 @@ export const getCroppingRegionForWindow = (state, { windowId }) => {
 /** Selector to get text display options for a given window */
 export const getWindowImageCropperOptions = createSelector(
   [getWindowConfig],
-  ({ imageCropper }) => ({
-    ...defaultConfig,
-    ...(imageCropper ?? {}),
-  })
+  ({ imageCropper }) => {
+    let { roundingPrecision } = imageCropper;
+    if (
+      typeof roundingPrecision !== "number" ||
+      roundingPrecision < 0 ||
+      roundingPrecision > 20
+    ) {
+      roundingPrecision = 5;
+    }
+    return {
+      ...defaultConfig,
+      ...(imageCropper ?? {}),
+      roundingPrecision,
+    };
+  }
 );

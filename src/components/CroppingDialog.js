@@ -18,10 +18,18 @@ import ScrollIndicatedDialogContent from "mirador/dist/es/src/containers/ScrollI
 import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
 
+import { defaultRegion } from "../state/selectors";
 import CopyToClipboard from "./dialog/CopyToClipboard";
 import RightsInformation from "./dialog/RightsInformation";
 import ShareButton from "./dialog/ShareButton";
 import { getAttributionString } from "./utils";
+
+const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
+  x: parseFloat(((x / width) * 100).toFixed(precision)),
+  y: parseFloat(((y / height) * 100).toFixed(precision)),
+  w: parseFloat(((w / width) * 100).toFixed(precision)),
+  h: parseFloat(((h / height) * 100).toFixed(precision)),
+});
 
 const useStyles = makeStyles((theme) => ({
   optionsHeading: {
@@ -43,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 const supportsClipboard = "clipboard" in navigator;
 
 const CroppingDialog = ({
+  croppingRegion: { imageCoordinates = defaultRegion },
   currentCanvas,
   label,
   options,
@@ -52,7 +61,13 @@ const CroppingDialog = ({
   updateOptions,
   viewType,
 }) => {
-  const { active, dialogOpen, enabled, showRightsInformation } = options;
+  const {
+    active,
+    dialogOpen,
+    enabled,
+    roundingPrecision,
+    showRightsInformation,
+  } = options;
   const inputRef = useRef();
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
@@ -74,9 +89,18 @@ const CroppingDialog = ({
       dialogOpen: false,
     });
   const attribution = getAttributionString(requiredStatement);
-  const imageUrl = `${currentCanvas.imageServiceIds[0]}/full/pct:${size}/${rotation}/${quality}.jpg`;
+  const canvasWidth = currentCanvas.getWidth();
+  const canvasHeight = currentCanvas.getHeight();
+  const { x, y, w, h } = toRelativeCoordinates(
+    imageCoordinates,
+    canvasWidth,
+    canvasHeight,
+    roundingPrecision
+  );
+  const region = `pct:${x},${y},${w},${h}`;
+  const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${rotation}/${quality}.jpg`;
   const getPreviewUrl = (width) =>
-    `${currentCanvas.imageServiceIds[0]}/full/${width},/${rotation}/${quality}.jpg`;
+    `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${rotation}/${quality}.jpg`;
   return (
     <Dialog
       fullWidth
@@ -203,7 +227,17 @@ const CroppingDialog = ({
 };
 
 CroppingDialog.propTypes = {
+  croppingRegion: PropTypes.shape({
+    imageCoordinates: PropTypes.shape({
+      x: PropTypes.number,
+      y: PropTypes.number,
+      w: PropTypes.number,
+      h: PropTypes.number,
+    }).isRequired,
+  }).isRequired,
   currentCanvas: PropTypes.shape({
+    getHeight: PropTypes.func.isRequired,
+    getWidth: PropTypes.func.isRequired,
     imageServiceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   }).isRequired,
   label: PropTypes.string.isRequired,
@@ -211,6 +245,7 @@ CroppingDialog.propTypes = {
     active: PropTypes.bool.isRequired,
     dialogOpen: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
+    roundingPrecision: PropTypes.number.isRequired,
     showRightsInformation: PropTypes.bool.isRequired,
   }).isRequired,
   requiredStatement: PropTypes.arrayOf(

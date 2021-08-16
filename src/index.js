@@ -48,6 +48,7 @@ export default [
     }),
     mapStateToProps: (state, { windowId }) => ({
       containerId: getContainerId(state),
+      croppingRegion: getCroppingRegionForWindow(state, { windowId }),
       currentCanvas: getCurrentCanvas(state, { windowId }),
       options: getWindowImageCropperOptions(state, { windowId }),
       requiredStatement: getRequiredStatement(state, { windowId }),
