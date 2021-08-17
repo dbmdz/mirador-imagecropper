@@ -105,8 +105,12 @@ const CroppingDialog = ({
   const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${mirror}${rotation}/${quality}.jpg`;
   const getPreviewUrl = (width) =>
     `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${mirror}${rotation}/${quality}.jpg`;
-  const aspectRatio =
-    imageCoordinates.h > 0 ? imageCoordinates.w / imageCoordinates.h : 1;
+  let aspectRatio = 1;
+  if (imageCoordinates.h > 0 && [0, 180].includes(rotation)) {
+    aspectRatio = imageCoordinates.w / imageCoordinates.h;
+  } else if (imageCoordinates.w > 0 && [90, 270].includes(rotation)) {
+    aspectRatio = imageCoordinates.h / imageCoordinates.w;
+  }
   return (
     <Dialog
       fullWidth
