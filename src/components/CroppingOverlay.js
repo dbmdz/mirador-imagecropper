@@ -6,22 +6,49 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Rnd } from "react-rnd";
 
-const getImageBounds = (image, width, height) => {
+const getImageBounds = (image, width, height, rotation) => {
   const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
   const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
   const bottomLeft = image.imageToViewerElementCoordinates(
     new Point(0, height)
   );
-  return {
-    x: Math.ceil(topLeft.x),
-    y: Math.ceil(topLeft.y),
-    w: Math.floor(topRight.x - topLeft.x),
-    h: Math.floor(bottomLeft.y - topLeft.y),
-  };
+  const bottomRight = image.imageToViewerElementCoordinates(
+    new Point(width, height)
+  );
+  switch (Math.abs(rotation)) {
+    case 90:
+      return {
+        x: Math.ceil(bottomLeft.x),
+        y: Math.ceil(bottomLeft.y),
+        w: Math.floor(topLeft.x - bottomLeft.x),
+        h: Math.floor(bottomRight.y - bottomLeft.y),
+      };
+    case 180:
+      return {
+        x: Math.ceil(bottomRight.x),
+        y: Math.ceil(bottomRight.y),
+        w: Math.floor(bottomLeft.x - bottomRight.x),
+        h: Math.floor(topRight.y - bottomRight.y),
+      };
+    case 270:
+      return {
+        x: Math.ceil(topRight.x),
+        y: Math.ceil(topRight.y),
+        w: Math.floor(bottomRight.x - topRight.x),
+        h: Math.floor(topLeft.y - topRight.y),
+      };
+    default:
+      return {
+        x: Math.ceil(topLeft.x),
+        y: Math.ceil(topLeft.y),
+        w: Math.floor(topRight.x - topLeft.x),
+        h: Math.floor(bottomLeft.y - topLeft.y),
+      };
+  }
 };
 
-const getIntialRegion = (image, width, height) => {
-  const { x, y, w, h } = getImageBounds(image, width, height);
+const getIntialRegion = (image, width, height, rotation) => {
+  const { x, y, w, h } = getImageBounds(image, width, height, rotation);
   return {
     x: Math.ceil(x + w / 4),
     y: Math.ceil(y + h / 4),
@@ -40,14 +67,23 @@ const isInsideImage = (bounds, { x, y, w, h }) => {
 };
 
 const toImageCoordinates = (image, { x, y, w, h }) => {
-  const topLeft = image.viewerElementToImageCoordinates(new Point(x, y));
-  const topRight = image.viewerElementToImageCoordinates(new Point(x + w, y));
-  const bottomLeft = image.viewerElementToImageCoordinates(new Point(x, y + h));
+  const pixelTopLeft = new Point(x, y);
+  const pixelTopRight = new Point(x + w, y);
+  const pixelBottomLeft = new Point(x, y + h);
+  const imageTopLeft = image.viewerElementToImageCoordinates(
+    image.viewport.pointFromPixelNoRotate(pixelTopLeft)
+  );
+  const imageTopRight = image.viewerElementToImageCoordinates(
+    image.viewport.pointFromPixelNoRotate(pixelTopRight)
+  );
+  const imageBottomLeft = image.viewerElementToImageCoordinates(
+    image.viewport.pointFromPixelNoRotate(pixelBottomLeft)
+  );
   return {
-    x: Math.ceil(topLeft.x),
-    y: Math.ceil(topLeft.y),
-    w: Math.floor(topRight.x - topLeft.x),
-    h: Math.floor(bottomLeft.y - topLeft.y),
+    x: Math.ceil(imageTopLeft.x),
+    y: Math.ceil(imageTopLeft.y),
+    w: Math.floor(imageTopRight.x - imageTopLeft.x),
+    h: Math.floor(imageBottomLeft.y - imageTopLeft.y),
   };
 };
 
@@ -104,7 +140,9 @@ const CroppingOverlay = ({
   const currentImage = viewer.world.getItemAt(0);
   // set intial region on whole image
   if (currentImage && Object.values(croppingRegion).every((c) => c === 0)) {
-    setCroppingRegion(getIntialRegion(currentImage, canvasWidth, canvasHeight));
+    setCroppingRegion(
+      getIntialRegion(currentImage, canvasWidth, canvasHeight, rotation)
+    );
   }
   const ResizeHandle = <div className={resizeHandle} />;
   return (
@@ -117,7 +155,8 @@ const CroppingOverlay = ({
         const imageBounds = getImageBounds(
           currentImage,
           canvasWidth,
-          canvasHeight
+          canvasHeight,
+          rotation
         );
         if (
           isInsideImage(imageBounds, {
@@ -139,7 +178,8 @@ const CroppingOverlay = ({
         const imageBounds = getImageBounds(
           currentImage,
           canvasWidth,
-          canvasHeight
+          canvasHeight,
+          rotation
         );
         if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });

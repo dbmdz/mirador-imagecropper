@@ -1,4 +1,5 @@
 import Mirador from "mirador/dist/es/src/index";
+import { miradorImageToolsPlugin } from "mirador-image-tools/es"; // eslint-disable-line import/no-extraneous-dependencies
 
 import imageCropperPlugin from "../../src";
 
@@ -26,6 +27,8 @@ const config = {
       active: true,
       enabled: true,
     },
+    imageToolsEnabled: true,
+    imageToolsOpen: false,
   },
   windows: [
     {
@@ -37,4 +40,4 @@ const config = {
   ],
 };
 
-Mirador.viewer(config, [...imageCropperPlugin]);
+Mirador.viewer(config, [...imageCropperPlugin, ...miradorImageToolsPlugin]);
