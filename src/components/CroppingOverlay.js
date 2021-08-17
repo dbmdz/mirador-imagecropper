@@ -53,6 +53,7 @@ const toImageCoordinates = (image, { x, y, w, h }) => {
 
 const useStyles = makeStyles(() => ({
   resizeHandle: {
+    background: "white",
     border: "2px solid gray",
     boxSizing: "border-box",
     height: "50%",
