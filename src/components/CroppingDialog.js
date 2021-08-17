@@ -5,12 +5,14 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import FormGroup from "@material-ui/core/FormGroup";
 import FormLabel from "@material-ui/core/FormLabel";
 import Link from "@material-ui/core/Link";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import Slider from "@material-ui/core/Slider";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Image from "material-ui-image";
@@ -69,6 +71,7 @@ const CroppingDialog = ({
     showRightsInformation,
   } = options;
   const inputRef = useRef();
+  const [mirrored, setMirrored] = useState(false);
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
@@ -98,9 +101,10 @@ const CroppingDialog = ({
     roundingPrecision
   );
   const region = `pct:${x},${y},${w},${h}`;
-  const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${rotation}/${quality}.jpg`;
+  const mirror = mirrored ? "!" : "";
+  const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${mirror}${rotation}/${quality}.jpg`;
   const getPreviewUrl = (width) =>
-    `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${rotation}/${quality}.jpg`;
+    `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${mirror}${rotation}/${quality}.jpg`;
   const aspectRatio =
     imageCoordinates.h > 0 ? imageCoordinates.w / imageCoordinates.h : 1;
   return (
@@ -170,6 +174,23 @@ const CroppingDialog = ({
               />
             ))}
           </RadioGroup>
+        </FormControl>
+        <FormControl component="fieldset" fullWidth>
+          <FormLabel component="legend">
+            {t("imageCropper.reflection")}
+          </FormLabel>
+          <FormGroup row>
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={mirrored}
+                  color="primary"
+                  onChange={(evt) => setMirrored(evt.target.checked)}
+                />
+              }
+              label={t("imageCropper.mirror")}
+            />
+          </FormGroup>
         </FormControl>
         <FormControl component="fieldset">
           <FormLabel component="legend">
