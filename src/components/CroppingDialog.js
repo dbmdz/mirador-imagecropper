@@ -216,6 +216,7 @@ const CroppingDialog = ({
             <ShareButton
               attribution={attribution}
               imageUrl={imageUrl}
+              key={p}
               label={label}
               provider={p}
               thumbnailUrl={getPreviewUrl(250)}
