@@ -193,7 +193,11 @@ CroppingOverlay.propTypes = {
   setCroppingRegion: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
-  viewer: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+  viewer: PropTypes.shape({
+    world: PropTypes.shape({
+      getItemAt: PropTypes.func.isRequired,
+    }).isRequired,
+  }),
   viewType: PropTypes.string.isRequired,
 };
 
