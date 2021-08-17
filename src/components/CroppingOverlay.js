@@ -166,7 +166,7 @@ const CroppingOverlay = ({
           });
         }}
       >
-        <ShareIcon color="white" />
+        <ShareIcon />
       </MiradorMenuButton>
     </Rnd>
   );
