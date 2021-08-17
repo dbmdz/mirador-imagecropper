@@ -6,6 +6,7 @@ export default {
       copyToClipboard: "In die Zwischenablage kopieren",
       deactivate: "Auswahl eines Bildausschnitts deaktivieren",
       linkToSelectedRegion: "Link zum ausgewählten Ausschnitt",
+      mirror: "Bild spiegeln",
       noteRights: "Bitte beachten Sie die Rechteerklärung",
       noteRights_plural: "Bitte beachten Sie die Rechteerklärungen",
       openDialog: "Einstellungsdialog öffnen",
@@ -21,6 +22,7 @@ export default {
         gray: "in Graustufen",
         label: "Qualität",
       },
+      reflection: "Spiegelung",
       rotation: "Rotation",
       share: {
         envelope: "Per Mail teilen",
@@ -39,6 +41,7 @@ export default {
       copyToClipboard: "Copy to clipboard",
       deactivate: "Deactivate selection of an image region",
       linkToSelectedRegion: "Link to the selected region",
+      mirror: "Mirror image",
       noteRights: "Please note the rights statement",
       noteRights_plural: "Please note the rights statements",
       openDialog: "Open settings dialog",
@@ -54,6 +57,7 @@ export default {
         gray: "in grayscale",
         label: "Quality",
       },
+      reflection: "Reflection",
       rotation: "Rotation",
       share: {
         envelope: "Share via mail",
