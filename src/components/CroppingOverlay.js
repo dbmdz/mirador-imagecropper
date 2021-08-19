@@ -75,10 +75,12 @@ const CroppingOverlay = ({
   croppingRegion,
   currentCanvas,
   options,
+  resetRotation,
   setCroppingRegion,
   t,
   updateOptions,
   viewer,
+  viewerConfig,
   viewType,
 }) => {
   const { active, dialogOpen, enabled } = options;
@@ -88,9 +90,14 @@ const CroppingOverlay = ({
     !active ||
     !viewer ||
     !currentCanvas ||
+    !viewerConfig ||
     viewType !== "single"
   ) {
     return null;
+  }
+  const { rotation } = viewerConfig;
+  if (rotation !== 0) {
+    resetRotation();
   }
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
@@ -190,6 +197,7 @@ CroppingOverlay.propTypes = {
     dialogOpen: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
+  resetRotation: PropTypes.func.isRequired,
   setCroppingRegion: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
@@ -198,12 +206,16 @@ CroppingOverlay.propTypes = {
       getItemAt: PropTypes.func.isRequired,
     }).isRequired,
   }),
+  viewerConfig: PropTypes.shape({
+    rotation: PropTypes.number.isRequired,
+  }),
   viewType: PropTypes.string.isRequired,
 };
 
 CroppingOverlay.defaultProps = {
   currentCanvas: undefined,
   viewer: undefined,
+  viewerConfig: undefined,
 };
 
 export default CroppingOverlay;

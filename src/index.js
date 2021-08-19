@@ -1,4 +1,7 @@
-import { updateWindow } from "mirador/dist/es/src/state/actions";
+import {
+  updateViewport,
+  updateWindow,
+} from "mirador/dist/es/src/state/actions";
 import {
   getContainerId,
   getCurrentCanvas,
@@ -64,6 +67,9 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
+      resetRotation: () => {
+        dispatch(updateViewport(windowId, { rotation: 0 }));
+      },
       setCroppingRegion: (region) => {
         dispatch(setCroppingRegion(windowId, region));
       },
