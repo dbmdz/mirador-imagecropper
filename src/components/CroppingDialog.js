@@ -26,6 +26,7 @@ import RightsInformation from "./dialog/RightsInformation";
 import ShareButton from "./dialog/ShareButton";
 import { getAttributionString } from "./utils";
 
+/** Converts the given absolute coordinates to relative ones with the given precision */
 const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
   x: parseFloat(((x / width) * 100).toFixed(precision)),
   y: parseFloat(((y / height) * 100).toFixed(precision)),
@@ -52,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
 const supportsClipboard = "clipboard" in navigator;
 
+/** Renders the dialog where some IIIF parameters can be defined */
 const CroppingDialog = ({
   croppingRegion: { imageCoordinates = defaultRegion },
   currentCanvas,

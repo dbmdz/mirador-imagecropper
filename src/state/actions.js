@@ -6,13 +6,13 @@ export const PluginActionTypes = {
  * sets the cropping region for a specific window
  *
  * @param {String} windowId
- * @param {Object} region
+ * @param {Object} region - the region as {x,y,w,h}
  * @return the action
  */
 export function setCroppingRegion(windowId, region) {
   return {
-    windowId,
     region,
     type: PluginActionTypes.SET_CROPPING_REGION,
+    windowId,
   };
 }

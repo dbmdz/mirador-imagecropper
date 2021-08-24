@@ -17,6 +17,7 @@ const iconMapping = {
   whatsapp: WhatsAppIcon,
 };
 
+/** Renders a button for sharing the given content on one of the supported providers */
 const ShareButton = ({
   attribution,
   imageUrl,
