@@ -1,5 +1,6 @@
 import Box from "@material-ui/core/Box";
 import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -35,6 +36,9 @@ const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
 });
 
 const useStyles = makeStyles((theme) => ({
+  actions: {
+    justifyContent: "space-between",
+  },
   optionsHeading: {
     marginBottom: theme.spacing(1),
     marginTop: theme.spacing(1),
@@ -77,7 +81,7 @@ const CroppingDialog = ({
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
-  const { optionsHeading, previewHeading, previewImage, previewLink } =
+  const { actions, optionsHeading, previewHeading, previewImage, previewLink } =
     useStyles();
   if (
     !enabled ||
@@ -237,21 +241,22 @@ const CroppingDialog = ({
         />
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
       </ScrollIndicatedDialogContent>
-      <DialogActions>
-        {["envelope", "facebook", "pinterest", "twitter", "whatsapp"].map(
-          (p) => (
-            <ShareButton
-              attribution={attribution}
-              imageUrl={imageUrl}
-              key={p}
-              label={label}
-              provider={p}
-              thumbnailUrl={getPreviewUrl(250)}
-              title={t(`imageCropper.share.${p}`)}
-            />
-          )
-        )}
-        <div style={{ flex: "1 0 0" }} />
+      <DialogActions className={actions}>
+        <ButtonGroup>
+          {["envelope", "facebook", "pinterest", "twitter", "whatsapp"].map(
+            (p) => (
+              <ShareButton
+                attribution={attribution}
+                imageUrl={imageUrl}
+                key={p}
+                label={label}
+                provider={p}
+                thumbnailUrl={getPreviewUrl(250)}
+                title={t(`imageCropper.share.${p}`)}
+              />
+            )
+          )}
+        </ButtonGroup>
         <Button color="primary" onClick={closeDialog}>
           {t("imageCropper.closeDialog")}
         </Button>
