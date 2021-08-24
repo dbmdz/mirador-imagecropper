@@ -10,6 +10,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+/** Renders the rights information defined in the used manifest */
 const RightsInformation = ({ rights, t }) => {
   const { root } = useStyles();
   if (!rights.length) {

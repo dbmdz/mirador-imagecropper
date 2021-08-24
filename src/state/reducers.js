@@ -1,5 +1,12 @@
 import { PluginActionTypes } from "./actions";
 
+/**
+ * Updates the global state of the plugin
+ *
+ * @param {Object} state - the current state
+ * @param {Object} action - the action with the new region as payload
+ * @returns the modified state if the action type matches
+ */
 export const croppingRegionsReducer = (state = {}, action) => {
   switch (action.type) {
     case PluginActionTypes.SET_CROPPING_REGION:

@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { Rnd } from "react-rnd";
 
+/** Converts the corner points of the image to coordinates in the browser */
 const getImageBounds = (image, width, height) => {
   const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
   const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
@@ -20,16 +21,22 @@ const getImageBounds = (image, width, height) => {
   };
 };
 
+/** Calculates the intial region of the current image */
 const getIntialRegion = (image, width, height) => {
   const { x, y, w, h } = getImageBounds(image, width, height);
   return {
+    // a fourth of the image width
     x: Math.ceil(x + w / 4),
+    // a fourth of the image height
     y: Math.ceil(y + h / 4),
+    // the half of the image width
     w: Math.floor(w / 2),
+    // the half of the image height
     h: Math.floor(h / 2),
   };
 };
 
+/** Checks if the given region is inside the bounds if the image */
 const isInsideImage = (bounds, { x, y, w, h }) => {
   return (
     x >= bounds.x &&
@@ -39,6 +46,7 @@ const isInsideImage = (bounds, { x, y, w, h }) => {
   );
 };
 
+/** Converts the given region in browser coordinates to image coordinates */
 const toImageCoordinates = (image, { x, y, w, h }) => {
   const topLeft = image.viewerElementToImageCoordinates(new Point(x, y));
   const topRight = image.viewerElementToImageCoordinates(new Point(x + w, y));
@@ -70,6 +78,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
+/** Renders the overlay used for defining the cropping region by dragging and resizing */
 const CroppingOverlay = ({
   containerId,
   croppingRegion,
@@ -96,13 +105,14 @@ const CroppingOverlay = ({
     return null;
   }
   const { rotation } = viewerConfig;
+  /* FIXME: at the moment the calculation of coordinates does not work with a rotated image, so we just reset the rotation */
   if (rotation !== 0) {
     resetRotation();
   }
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
   const currentImage = viewer.world.getItemAt(0);
-  // set intial region on whole image
+  /* Set intial region dependant on the current image */
   if (currentImage && Object.values(croppingRegion).every((c) => c === 0)) {
     setCroppingRegion(getIntialRegion(currentImage, canvasWidth, canvasHeight));
   }

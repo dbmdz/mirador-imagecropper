@@ -3,6 +3,7 @@ import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuBut
 import PropTypes from "prop-types";
 import React from "react";
 
+/** Renders the button to (de)activate the cropping overlay */
 const CroppingControls = ({
   containerId,
   options,

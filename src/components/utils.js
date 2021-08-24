@@ -1,3 +1,4 @@
+/** Constructs the attribution string from the data given in the manifest */
 export function getAttributionString(requiredStatement) {
   if (!requiredStatement.length) {
     return null;
@@ -9,6 +10,7 @@ export function getAttributionString(requiredStatement) {
   );
 }
 
+/** Constructs a share link for the given content and provider */
 export function getShareLink(
   attribution,
   imageUrl,
