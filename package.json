@@ -61,11 +61,15 @@
     "reselect": "^4.0.0",
     "uuid": "^8.3.2"
   },
-  "author": "",
+  "author": "Matthias Lindinger <matthias.lindinger@bsb-muenchen.de>",
   "homepage": "",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/dbmdz/mirador-imagecropper",
   "keywords": [
+    "iiif",
+    "mirador",
+    "mirador3",
+    "mirador-plugin",
     "react-component"
   ]
 }
