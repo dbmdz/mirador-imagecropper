@@ -3,7 +3,7 @@
 [![npm package][npm-badge]][npm]
 [![required Mirador version][mirador-badge]][mirador]
 
-Describe mirador-imagecropper here.
+A Mirador 3 plugin to retrieve the image url for the selected area.
 
 [npm-badge]: https://img.shields.io/npm/v/mirador-imagecropper.png?style=flat-square
 [npm]: https://www.npmjs.org/package/mirador-imagecropper
