@@ -30,8 +30,17 @@ const config = {
   windows: [
     {
       canvasIndex: 8,
+      imageCropper: {
+        active: false,
+      },
       manifestId:
         "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00034024/manifest",
+      view: "single",
+    },
+    {
+      canvasIndex: 8,
+      manifestId:
+        "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00135902/manifest",
       view: "single",
     },
   ],
