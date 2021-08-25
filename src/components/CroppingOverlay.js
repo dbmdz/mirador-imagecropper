@@ -21,8 +21,8 @@ const getImageBounds = (image, width, height) => {
   };
 };
 
-/** Calculates the intial region of the current image */
-const getIntialRegion = (image, width, height) => {
+/** Calculates the initial region of the current image */
+const getInitialRegion = (image, width, height) => {
   const { x, y, w, h } = getImageBounds(image, width, height);
   return {
     // a fourth of the image width
@@ -112,9 +112,9 @@ const CroppingOverlay = ({
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
   const currentImage = viewer.world.getItemAt(0);
-  /* Set intial region dependant on the current image */
+  /* Set initial region dependant on the current image */
   if (currentImage && Object.values(croppingRegion).every((c) => c === 0)) {
-    setCroppingRegion(getIntialRegion(currentImage, canvasWidth, canvasHeight));
+    setCroppingRegion(getInitialRegion(currentImage, canvasWidth, canvasHeight));
   }
   const ResizeHandle = <div className={resizeHandle} />;
   return (
