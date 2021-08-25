@@ -21,7 +21,6 @@ import ScrollIndicatedDialogContent from "mirador/dist/es/src/containers/ScrollI
 import PropTypes from "prop-types";
 import React, { useRef, useState } from "react";
 
-import { defaultRegion } from "../state/selectors";
 import CopyToClipboard from "./dialog/CopyToClipboard";
 import RightsInformation from "./dialog/RightsInformation";
 import ShareButton from "./dialog/ShareButton";
@@ -59,7 +58,7 @@ const supportsClipboard = "clipboard" in navigator;
 
 /** Renders the dialog where some IIIF parameters can be defined */
 const CroppingDialog = ({
-  croppingRegion: { imageCoordinates = defaultRegion },
+  croppingRegion: { imageCoordinates },
   currentCanvas,
   label,
   options,
@@ -88,7 +87,8 @@ const CroppingDialog = ({
     !active ||
     !dialogOpen ||
     !currentCanvas ||
-    viewType !== "single"
+    viewType !== "single" ||
+    !imageCoordinates
   ) {
     return null;
   }
