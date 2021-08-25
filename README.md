@@ -1,16 +1,12 @@
 # mirador-imagecropper
 
-[![Travis][build-badge]][build]
 [![npm package][npm-badge]][npm]
-[![Coveralls][coveralls-badge]][coveralls]
+[![required Mirador version][mirador-badge]][mirador]
 
 Describe mirador-imagecropper here.
 
-[build-badge]: https://img.shields.io/travis/user/repo/master.png?style=flat-square
-[build]: https://travis-ci.org/user/repo
+[npm-badge]: https://img.shields.io/npm/v/mirador-imagecropper.png?style=flat-square
+[npm]: https://www.npmjs.org/package/mirador-imagecropper
 
-[npm-badge]: https://img.shields.io/npm/v/npm-package.png?style=flat-square
-[npm]: https://www.npmjs.org/package/npm-package
-
-[coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
-[coveralls]: https://coveralls.io/github/user/repo
+[mirador-badge]: https://img.shields.io/badge/Mirador-%E2%89%A53.1.1-blueviolet
+[mirador]: https://github.com/ProjectMirador/mirador/releases/tag/v3.1.1
