@@ -113,8 +113,13 @@ const CroppingOverlay = ({
   const canvasHeight = currentCanvas.getHeight();
   const currentImage = viewer.world.getItemAt(0);
   /* Set initial region dependant on the current image */
-  if (currentImage && Object.values(croppingRegion).every((c) => c === 0)) {
-    setCroppingRegion(getInitialRegion(currentImage, canvasWidth, canvasHeight));
+  const shouldSetInitialRegion = Object.entries(croppingRegion)
+    .filter(([k]) => k !== "imageCoordinates")
+    .every(([, v]) => v === 0);
+  if (currentImage && shouldSetInitialRegion) {
+    setCroppingRegion(
+      getInitialRegion(currentImage, canvasWidth, canvasHeight)
+    );
   }
   const ResizeHandle = <div className={resizeHandle} />;
   return (
