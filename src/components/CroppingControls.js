@@ -22,7 +22,7 @@ const CroppingControls = ({
       aria-label={
         active ? t("imageCropper.deactivate") : t("imageCropper.activate")
       }
-      color={active ? "primary" : ""}
+      color={active ? "primary" : "default"}
       containerId={containerId}
       onClick={() =>
         updateOptions({
