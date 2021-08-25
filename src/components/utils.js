@@ -3,10 +3,10 @@ export function getAttributionString(requiredStatement) {
   if (!requiredStatement.length) {
     return null;
   }
-  const intial = requiredStatement.shift();
+  const initial = requiredStatement.shift();
   return requiredStatement.reduce(
     (acc, current) => `${acc}, ${current.values.join(", ")}`,
-    intial.values.join(", ")
+    initial.values.join(", ")
   );
 }
 
