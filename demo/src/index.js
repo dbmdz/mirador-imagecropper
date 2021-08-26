@@ -19,6 +19,11 @@ const config = {
         "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00034024/manifest",
       provider: "Bavarian State Library",
     },
+    {
+      manifestId:
+        "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00110032/manifest",
+      provider: "Bavarian State Library",
+    },
   ],
   id: "demo",
   window: {
