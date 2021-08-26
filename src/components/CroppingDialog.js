@@ -237,6 +237,7 @@ const CroppingDialog = ({
         <Image
           aspectRatio={aspectRatio}
           className={previewImage}
+          color="transparent"
           src={getPreviewUrl(500)}
         />
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
