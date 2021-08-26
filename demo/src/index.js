@@ -43,7 +43,6 @@ const config = {
       view: "single",
     },
     {
-      canvasIndex: 8,
       manifestId:
         "https://api.digitale-sammlungen.de/iiif/presentation/v2/bsb00135902/manifest",
       view: "single",
