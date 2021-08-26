@@ -31,7 +31,7 @@ export const getCroppingRegionForWindow = (state, { windowId }) => {
 /** Selector to get text display options for a given window */
 export const getWindowImageCropperOptions = createSelector(
   [getWindowConfig],
-  ({ imageCropper }) => {
+  ({ imageCropper = {} }) => {
     let { roundingPrecision } = imageCropper;
     if (
       typeof roundingPrecision !== "number" ||
@@ -42,7 +42,7 @@ export const getWindowImageCropperOptions = createSelector(
     }
     return {
       ...defaultConfig,
-      ...(imageCropper ?? {}),
+      ...imageCropper,
       roundingPrecision,
     };
   }
