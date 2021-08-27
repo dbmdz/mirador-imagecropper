@@ -3,7 +3,7 @@ export const PluginActionTypes = {
 };
 
 /**
- * sets the cropping region for a specific window
+ * Sets the cropping region for a specific window
  *
  * @param {String} windowId
  * @param {Object} region - the region as {x,y,w,h}
