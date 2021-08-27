@@ -36,7 +36,7 @@ const getInitialRegion = (image, width, height) => {
   };
 };
 
-/** Checks if the given region is inside the bounds if the image */
+/** Checks if the given region is inside the bounds of the image */
 const isInsideImage = (bounds, { x, y, w, h }) => {
   return (
     x >= bounds.x &&
