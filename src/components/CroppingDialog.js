@@ -111,6 +111,7 @@ const CroppingDialog = ({
   const imageUrl = `${currentCanvas.imageServiceIds[0]}/${region}/pct:${size}/${mirror}${rotation}/${quality}.jpg`;
   const getPreviewUrl = (width) =>
     `${currentCanvas.imageServiceIds[0]}/${region}/${width},/${mirror}${rotation}/${quality}.jpg`;
+  /* The aspect ratio, which depends on the rotation, is only relevant for the preview image */
   let aspectRatio = 1;
   if (imageCoordinates.h > 0 && [0, 180].includes(rotation)) {
     aspectRatio = imageCoordinates.w / imageCoordinates.h;
