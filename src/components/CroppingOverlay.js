@@ -105,7 +105,10 @@ const CroppingOverlay = ({
     return null;
   }
   const { rotation } = viewerConfig;
-  /* FIXME: at the moment the calculation of coordinates does not work with a rotated image, so we just reset the rotation */
+  /*
+   * FIXME: at the moment the calculation of coordinates does not work with a rotated image, so we just reset the rotation
+   * This is only a problem if the user can change the rotation by e.g. the mirador-image-tools plugin
+   */
   if (rotation !== 0) {
     resetRotation();
   }
