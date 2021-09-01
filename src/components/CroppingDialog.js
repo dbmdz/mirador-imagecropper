@@ -260,7 +260,7 @@ const CroppingDialog = ({
           )}
         </ButtonGroup>
         <Button color="primary" onClick={closeDialog}>
-          {t("imageCropper.closeDialog")}
+          {t("imageCropper.close")}
         </Button>
       </DialogActions>
     </Dialog>
