@@ -3,7 +3,7 @@ import ShareIcon from "@material-ui/icons/Share";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Rnd } from "react-rnd";
 
 /** Converts the corner points of the image to coordinates in the browser */
@@ -60,6 +60,13 @@ const toImageCoordinates = (image, { x, y, w, h }) => {
 };
 
 const useStyles = makeStyles(() => ({
+  dialogButton: {
+    backgroundColor: "rgba(255,255,255,0.8) !important",
+    borderRadius: "25%",
+    left: ({ buttonOutside }) => (buttonOutside ? "-35px" : "5px"),
+    position: ({ buttonOutside }) => buttonOutside && "absolute",
+    top: "5px",
+  },
   resizeHandle: {
     background: "white",
     border: "2px solid gray",
@@ -93,7 +100,16 @@ const CroppingOverlay = ({
   viewType,
 }) => {
   const { active, dialogOpen, enabled } = options;
-  const { resizeHandle, root } = useStyles();
+  const isInitialRenderOfCanvas = Object.entries(croppingRegion)
+    .filter(([k]) => k !== "imageCoordinates")
+    .every(([, v]) => v === 0);
+  const [buttonOutside, setButtonOutside] = useState(true);
+  const { dialogButton, resizeHandle, root } = useStyles({ buttonOutside });
+  useEffect(() => {
+    if (isInitialRenderOfCanvas) {
+      setButtonOutside(true);
+    }
+  }, [isInitialRenderOfCanvas]);
   if (
     !enabled ||
     !active ||
@@ -115,11 +131,8 @@ const CroppingOverlay = ({
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
   const currentImage = viewer.world.getItemAt(0);
-  /* Set initial region dependant on the current image */
-  const shouldSetInitialRegion = Object.entries(croppingRegion)
-    .filter(([k]) => k !== "imageCoordinates")
-    .every(([, v]) => v === 0);
-  if (currentImage && shouldSetInitialRegion) {
+  /* Set initial region dependant on the current image if this is the initial render for the canvas */
+  if (currentImage && isInitialRenderOfCanvas) {
     setCroppingRegion(
       getInitialRegion(currentImage, canvasWidth, canvasHeight)
     );
@@ -145,6 +158,15 @@ const CroppingOverlay = ({
           })
         ) {
           setCroppingRegion({ x, y });
+          /*
+           * Put the button inside the overlay if it would be cut off by the window borders
+           * (35 is the width of the button)
+           */
+          if (x <= 35) {
+            setButtonOutside(false);
+          } else {
+            setButtonOutside(true);
+          }
         }
       }}
       onResize={(
@@ -161,6 +183,15 @@ const CroppingOverlay = ({
         );
         if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });
+          /*
+           * Put the button inside the overlay if it would be cut off by the window borders
+           * (35 is the width of the button)
+           */
+          if (x <= 35) {
+            setButtonOutside(false);
+          } else {
+            setButtonOutside(true);
+          }
         }
       }}
       position={{
@@ -181,6 +212,7 @@ const CroppingOverlay = ({
       <MiradorMenuButton
         aria-expanded={dialogOpen}
         aria-label={t("imageCropper.openDialog")}
+        className={dialogButton}
         containerId={containerId}
         onClick={() => {
           setCroppingRegion({
@@ -191,6 +223,7 @@ const CroppingOverlay = ({
             dialogOpen: true,
           });
         }}
+        size="small"
       >
         <ShareIcon />
       </MiradorMenuButton>
