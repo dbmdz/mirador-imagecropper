@@ -16,7 +16,7 @@ import CroppingOverlay from "./components/CroppingOverlay";
 import translations from "./locales";
 import { setCroppingRegion } from "./state/actions";
 import { croppingRegionsReducer } from "./state/reducers";
-import croppingRegionSaga from "./state/sagas";
+import croppingRegionsSaga from "./state/sagas";
 import {
   getCroppingRegionForWindow,
   getWindowImageCropperOptions,
@@ -87,7 +87,7 @@ export default [
     reducers: {
       croppingRegions: croppingRegionsReducer,
     },
-    saga: croppingRegionSaga,
+    saga: croppingRegionsSaga,
     target: "OpenSeadragonViewer",
   },
 ];

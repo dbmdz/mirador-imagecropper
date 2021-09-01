@@ -10,6 +10,6 @@ export function* initalizeRegion({ windowId }) {
 }
 
 /** Root saga for the plugin */
-export default function* croppingRegionSaga() {
+export default function* croppingRegionsSaga() {
   yield all([takeEvery(ActionTypes.SET_CANVAS, initalizeRegion)]);
 }
