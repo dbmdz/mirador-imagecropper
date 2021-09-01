@@ -16,10 +16,11 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import Alert from "@material-ui/lab/Alert";
 import Image from "material-ui-image";
 import ScrollIndicatedDialogContent from "mirador/dist/es/src/containers/ScrollIndicatedDialogContent";
 import PropTypes from "prop-types";
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 
 import CopyToClipboard from "./dialog/CopyToClipboard";
 import RightsInformation from "./dialog/RightsInformation";
@@ -37,6 +38,9 @@ const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
 const useStyles = makeStyles((theme) => ({
   actions: {
     justifyContent: "space-between",
+  },
+  alert: {
+    marginBottom: theme.spacing(1),
   },
   optionsHeading: {
     marginBottom: theme.spacing(1),
@@ -75,13 +79,19 @@ const CroppingDialog = ({
     roundingPrecision,
     showRightsInformation,
   } = options;
-  const inputRef = useRef();
+  const [copiedToClipboard, setCopiedToClipboard] = useState(false);
   const [mirrored, setMirrored] = useState(false);
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
-  const { actions, optionsHeading, previewHeading, previewImage, previewLink } =
-    useStyles();
+  const {
+    actions,
+    alert,
+    optionsHeading,
+    previewHeading,
+    previewImage,
+    previewLink,
+  } = useStyles();
   if (
     !enabled ||
     !active ||
@@ -134,14 +144,25 @@ const CroppingDialog = ({
         </Typography>
       </DialogTitle>
       <ScrollIndicatedDialogContent dividers>
+        {copiedToClipboard && (
+          <Alert
+            className={alert}
+            closeText={t("imageCropper.close")}
+            onClose={() => setCopiedToClipboard(false)}
+            severity="success"
+          >
+            {t("imageCropper.copiedToClipboard")}
+          </Alert>
+        )}
         <TextField
           fullWidth
           InputProps={{
             endAdornment: (
               <CopyToClipboard
                 onCopy={() => {
-                  inputRef?.current?.select();
                   navigator.clipboard.writeText(imageUrl);
+                  setCopiedToClipboard(true);
+                  setTimeout(() => setCopiedToClipboard(false), 3000);
                 }}
                 supported={supportsClipboard}
                 t={t}
@@ -149,7 +170,6 @@ const CroppingDialog = ({
             ),
             readOnly: true,
           }}
-          inputRef={inputRef}
           size="small"
           value={imageUrl}
           variant="outlined"
