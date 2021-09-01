@@ -3,6 +3,7 @@ export default {
     imageCropper: {
       activate: "Auswahl eines Bildausschnitts aktivieren",
       close: "Schließen",
+      copiedToClipboard: "Erfolgreich in die Zwischenablage kopiert",
       copyToClipboard: "In die Zwischenablage kopieren",
       deactivate: "Auswahl eines Bildausschnitts deaktivieren",
       linkToSelectedRegion: "Link zum ausgewählten Ausschnitt",
@@ -38,7 +39,8 @@ export default {
     imageCropper: {
       activate: "Activate selection of an image region",
       close: "Close",
-      copyToClipboard: "Copy to clipboard",
+      copiedToClipboard: "Copied successfully to the clipboard",
+      copyToClipboard: "Copy to the clipboard",
       deactivate: "Deactivate selection of an image region",
       linkToSelectedRegion: "Link to the selected region",
       mirror: "Mirror image",
