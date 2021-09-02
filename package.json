@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "material-ui-image": "^3.3.2",
-    "react-rnd": "^10.3.1"
+    "react-rnd": "^10.3.4"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.4",
