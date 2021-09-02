@@ -1,7 +1,7 @@
 {
   "name": "mirador-imagecropper",
   "version": "0.1.0",
-  "description": "mirador-imagecropper React component",
+  "description": "Mirador 3 plugin to retrieve the image url for the selected area",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
