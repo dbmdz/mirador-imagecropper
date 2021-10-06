@@ -141,6 +141,7 @@ const CroppingOverlay = ({
   return (
     <Rnd
       bounds="parent"
+      cancel={`.${dialogButton.split(" ")[0]}`}
       className={root}
       minHeight={50}
       minWidth={50}
