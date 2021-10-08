@@ -115,12 +115,16 @@ const CroppingOverlay = ({
     !active ||
     !viewer ||
     !currentCanvas ||
-    !viewerConfig ||
     viewType !== "single"
   ) {
     return null;
   }
-  const { rotation } = viewerConfig;
+  /*
+   * FIXME: there seems to be a bug in Mirador, that viewerConfig is null in certain situations:
+   * when changing the view type, viewerConfig will be null, see https://github.com/ProjectMirador/mirador/blob/master/src/state/reducers/viewers.js#L20-L21
+   * only on the first page it doesn't get reset to a valid object, on all other pages there is no problem
+   */
+  const { rotation = 0 } = viewerConfig ?? {};
   /*
    * FIXME: at the moment the calculation of coordinates does not work with a rotated image, so we just reset the rotation
    * This is only a problem if the user can change the rotation by e.g. the mirador-image-tools plugin
