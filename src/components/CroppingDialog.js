@@ -62,6 +62,7 @@ const supportsClipboard = "clipboard" in navigator;
 
 /** Renders the dialog where some IIIF parameters can be defined */
 const CroppingDialog = ({
+  containerId,
   croppingRegion: { imageCoordinates },
   currentCanvas,
   label,
@@ -71,6 +72,7 @@ const CroppingDialog = ({
   t,
   updateOptions,
   viewType,
+  windowId,
 }) => {
   const {
     active,
@@ -130,6 +132,7 @@ const CroppingDialog = ({
   }
   return (
     <Dialog
+      container={document.querySelector(`#${containerId} #${windowId}`)}
       fullWidth
       maxWidth="sm"
       onClose={closeDialog}
@@ -288,6 +291,7 @@ const CroppingDialog = ({
 };
 
 CroppingDialog.propTypes = {
+  containerId: PropTypes.string.isRequired,
   croppingRegion: PropTypes.shape({
     imageCoordinates: PropTypes.shape({
       x: PropTypes.number,
@@ -318,6 +322,7 @@ CroppingDialog.propTypes = {
   t: PropTypes.func.isRequired,
   updateOptions: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
+  windowId: PropTypes.string.isRequired,
 };
 
 CroppingDialog.defaultProps = {
