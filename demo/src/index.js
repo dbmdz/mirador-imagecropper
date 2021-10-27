@@ -27,6 +27,7 @@ const config = {
   ],
   id: "demo",
   window: {
+    allowFullscreen: true,
     imageCropper: {
       active: true,
       enabled: true,
