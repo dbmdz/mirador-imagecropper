@@ -8,8 +8,8 @@ export default {
       deactivate: "Auswahl eines Bildausschnitts deaktivieren",
       linkToSelectedRegion: "Link zum ausgewählten Ausschnitt",
       mirror: "Bild spiegeln",
-      noteRights: "Bitte beachten Sie die Rechteerklärung",
-      noteRights_plural: "Bitte beachten Sie die Rechteerklärungen",
+      noteRights: "Bitte beachten Sie den Rechtehinweis",
+      noteRights_plural: "Bitte beachten Sie die Rechtehinweise",
       openDialog: "Einstellungsdialog öffnen",
       options: "Optionen",
       preview: {
