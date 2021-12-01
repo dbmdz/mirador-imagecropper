@@ -38,9 +38,16 @@ const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
 const useStyles = makeStyles((theme) => ({
   actions: {
     justifyContent: "space-between",
+    flexWrap: "wrap",
+  },
+  actionButtons: {
+    flexWrap: "wrap",
   },
   alert: {
     marginBottom: theme.spacing(1),
+  },
+  legend: {
+    width: "100%",
   },
   optionsHeading: {
     marginBottom: theme.spacing(1),
@@ -55,6 +62,10 @@ const useStyles = makeStyles((theme) => ({
   },
   previewLink: {
     fontFamily: "sans-serif",
+  },
+  sliderValue: {
+    display: "block",
+    float: "right",
   },
 }));
 
@@ -88,11 +99,14 @@ const CroppingDialog = ({
   const [size, setSize] = useState(100);
   const {
     actions,
+    actionButtons,
     alert,
+    legend,
     optionsHeading,
     previewHeading,
     previewImage,
     previewLink,
+    sliderValue,
   } = useStyles();
   if (
     !enabled ||
@@ -181,13 +195,14 @@ const CroppingDialog = ({
           {t("imageCropper.options")}
         </Typography>
         <FormControl component="fieldset" fullWidth>
-          <FormLabel component="legend">{t("imageCropper.size")}</FormLabel>
+          <FormLabel component="legend" className={legend}>
+            {t("imageCropper.size")}{" "}
+            <span className={sliderValue}>{size}%</span>
+          </FormLabel>
           <Slider
             min={1}
             onChange={(_evt, s) => setSize(s)}
             value={size}
-            valueLabelDisplay="on"
-            valueLabelFormat={(v) => `${v}%`}
           />
         </FormControl>
         <FormControl component="fieldset">
@@ -267,7 +282,7 @@ const CroppingDialog = ({
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
       </ScrollIndicatedDialogContent>
       <DialogActions className={actions}>
-        <ButtonGroup>
+        <ButtonGroup className={actionButtons}>
           {["envelope", "facebook", "pinterest", "twitter", "whatsapp"].map(
             (p) => (
               <ShareButton
