@@ -48,6 +48,8 @@ const useStyles = makeStyles((theme) => ({
   },
   legend: {
     width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
   },
   optionsHeading: {
     marginBottom: theme.spacing(1),
@@ -62,10 +64,6 @@ const useStyles = makeStyles((theme) => ({
   },
   previewLink: {
     fontFamily: "sans-serif",
-  },
-  sliderValue: {
-    display: "block",
-    float: "right",
   },
 }));
 
@@ -106,7 +104,6 @@ const CroppingDialog = ({
     previewHeading,
     previewImage,
     previewLink,
-    sliderValue,
   } = useStyles();
   if (
     !enabled ||
@@ -196,8 +193,7 @@ const CroppingDialog = ({
         </Typography>
         <FormControl component="fieldset" fullWidth>
           <FormLabel component="legend" className={legend}>
-            {t("imageCropper.size")}{" "}
-            <span className={sliderValue}>{size}%</span>
+            {t("imageCropper.size")} <span>{size}%</span>
           </FormLabel>
           <Slider min={1} onChange={(_evt, s) => setSize(s)} value={size} />
         </FormControl>
