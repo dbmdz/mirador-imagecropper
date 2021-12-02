@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5](https://github.com/dbmdz/mirador-imagecropper/releases/tag/0.1.5) - 2021-12-02
+
+### Changed
+
+- Label of size value of the cropped image moved from slider-bubble to legend
+- Action buttons now wrap on small display sizes
+- Fix positioning for dialog-opener button
+
 ## [0.1.4](https://github.com/dbmdz/mirador-imagecropper/releases/tag/0.1.4) - 2021-11-23
 
 ### Changed
