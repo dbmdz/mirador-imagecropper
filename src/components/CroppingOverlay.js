@@ -64,7 +64,7 @@ const useStyles = makeStyles(() => ({
     backgroundColor: "rgba(255,255,255,0.8) !important",
     borderRadius: "25%",
     transform: ({ buttonOutside }) =>
-      buttonOutside ? "translateX(calc(-100% - 5px))" : "translate(5px)",
+      buttonOutside ? "translateX(calc(-100% - 5px))" : "translateX(5px)",
     position: ({ buttonOutside }) => buttonOutside && "absolute",
     left: "0",
     top: "5px",
