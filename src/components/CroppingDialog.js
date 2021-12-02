@@ -199,11 +199,7 @@ const CroppingDialog = ({
             {t("imageCropper.size")}{" "}
             <span className={sliderValue}>{size}%</span>
           </FormLabel>
-          <Slider
-            min={1}
-            onChange={(_evt, s) => setSize(s)}
-            value={size}
-          />
+          <Slider min={1} onChange={(_evt, s) => setSize(s)} value={size} />
         </FormControl>
         <FormControl component="fieldset">
           <FormLabel component="legend">{t("imageCropper.rotation")}</FormLabel>
