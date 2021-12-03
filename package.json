@@ -2,6 +2,17 @@
   "name": "mirador-imagecropper",
   "version": "0.1.5",
   "description": "Mirador 3 plugin to retrieve the image url for the selected area",
+  "keywords": [
+    "iiif",
+    "mirador",
+    "mirador3",
+    "mirador-plugin",
+    "react-component"
+  ],
+  "homepage": "",
+  "repository": "https://github.com/dbmdz/mirador-imagecropper",
+  "license": "MIT",
+  "author": "Matthias Lindinger <matthias.lindinger@bsb-muenchen.de>",
   "main": "lib/index.js",
   "module": "es/index.js",
   "files": [
@@ -24,18 +35,6 @@
   "dependencies": {
     "material-ui-image": "^3.3.2",
     "react-rnd": "^10.3.4"
-  },
-  "peerDependencies": {
-    "@material-ui/core": "^4.11.4",
-    "@material-ui/icons": "^4.11.2",
-    "@material-ui/lab": "^4.0.0-alpha.58",
-    "mirador": "^3.1.1",
-    "openseadragon": "^2.4.2",
-    "prop-types": "^15.7.2",
-    "react": "16.x",
-    "react-dom": "16.x",
-    "redux-saga": "^1.1.3",
-    "reselect": "^4.0.0"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
@@ -61,15 +60,16 @@
     "reselect": "^4.0.0",
     "uuid": "^8.3.2"
   },
-  "author": "Matthias Lindinger <matthias.lindinger@bsb-muenchen.de>",
-  "homepage": "",
-  "license": "MIT",
-  "repository": "https://github.com/dbmdz/mirador-imagecropper",
-  "keywords": [
-    "iiif",
-    "mirador",
-    "mirador3",
-    "mirador-plugin",
-    "react-component"
-  ]
+  "peerDependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.58",
+    "mirador": "^3.1.1",
+    "openseadragon": "^2.4.2",
+    "prop-types": "^15.7.2",
+    "react": "16.x",
+    "react-dom": "16.x",
+    "redux-saga": "^1.1.3",
+    "reselect": "^4.0.0"
+  }
 }
