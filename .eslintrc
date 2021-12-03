@@ -20,7 +20,9 @@
     "simple-import-sort"
   ],
   "rules": {
+    "default-param-last": "warn",
     "import/prefer-default-export": "off",
+    "react/function-component-definition": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
