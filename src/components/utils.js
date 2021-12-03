@@ -14,7 +14,7 @@ export function getAttributionString(requiredStatement) {
 export function getShareLink(
   attribution,
   imageUrl,
-  label = "",
+  label,
   provider,
   thumbnailUrl
 ) {
