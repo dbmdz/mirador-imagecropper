@@ -34,7 +34,7 @@
   },
   "dependencies": {
     "material-ui-image": "^3.3.2",
-    "react-rnd": "^10.3.4"
+    "react-rnd": "^10.3.5"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.4",
@@ -43,17 +43,17 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.2",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.25.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "mirador": "^3.3.0",
     "nwb": "0.25.x",
     "openseadragon": "^2.4.2",
     "prettier": "^2.5.1",
-    "prop-types": "^15.7.2",
+    "prop-types": "^15.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "redux-saga": "^1.1.3",
