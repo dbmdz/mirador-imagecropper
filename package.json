@@ -49,6 +49,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "lodash": "^4.17.11",
     "mirador": "^3.3.0",
     "nwb": "0.25.x",
     "openseadragon": "^2.4.2",
