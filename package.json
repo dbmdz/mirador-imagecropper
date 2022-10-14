@@ -33,9 +33,9 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
+    "lodash": "^4.17.11",
     "material-ui-image": "^3.3.2",
-    "react-rnd": "^10.3.5",
-    "lodash": "^4.17.11"
+    "react-rnd": "^10.3.5"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.4",
