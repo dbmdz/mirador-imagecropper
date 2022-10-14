@@ -1,4 +1,4 @@
-import flatten from 'lodash/flatten';
+import flatten from "lodash/flatten";
 import {
   updateViewport,
   updateWindow,
@@ -6,10 +6,10 @@ import {
 import {
   getContainerId,
   getCurrentCanvas,
+  getCurrentCanvasWorld,
   getRequiredStatement,
   getRights,
   getWindowViewType,
-  getCurrentCanvasWorld,
 } from "mirador/dist/es/src/state/selectors";
 
 import CroppingControls from "./components/CroppingControls";
@@ -52,19 +52,21 @@ export default [
         dispatch(updateWindow(windowId, { imageCropper: options })),
     }),
     mapStateToProps: (state, { windowId }) => {
-      const canvasWorld = getCurrentCanvasWorld(state, { windowId })
-      const imageServiceIds = flatten(canvasWorld.canvases.map(c => c.imageServiceIds))
+      const canvasWorld = getCurrentCanvasWorld(state, { windowId });
+      const imageServiceIds = flatten(
+        canvasWorld.canvases.map((c) => c.imageServiceIds)
+      );
 
       return {
         containerId: getContainerId(state),
         croppingRegion: getCroppingRegionForWindow(state, { windowId }),
         currentCanvas: getCurrentCanvas(state, { windowId }),
-        imageServiceIds: imageServiceIds,
+        imageServiceIds,
         options: getWindowImageCropperOptions(state, { windowId }),
         requiredStatement: getRequiredStatement(state, { windowId }),
         rights: getRights(state, { windowId }),
         viewType: getWindowViewType(state, { windowId }),
-      }
+      };
     },
     mode: "add",
     target: "Window",

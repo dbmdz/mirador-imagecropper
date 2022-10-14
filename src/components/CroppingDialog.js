@@ -313,6 +313,7 @@ CroppingDialog.propTypes = {
     getWidth: PropTypes.func.isRequired,
     imageServiceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   }),
+  imageServiceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   label: PropTypes.string,
   options: PropTypes.shape({
     active: PropTypes.bool.isRequired,
