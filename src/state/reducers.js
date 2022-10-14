@@ -7,7 +7,7 @@ import { PluginActionTypes } from "./actions";
  * @param {Object} action - the action with the new region as payload
  * @returns the modified state if the action type matches
  */
-export const croppingRegionsReducer = (state = {}, action) => {
+export const croppingRegionsReducer = (state = {}, action = {}) => {
   switch (action.type) {
     case PluginActionTypes.SET_CROPPING_REGION:
       return {
