@@ -16,12 +16,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16
       - run: npm ci
       - run: npm run build --if-present
       # there are no real tests at the moment
       #- run: npm run test:coverage
       - run: npm run lint
-    strategy:
-      matrix:
-        node: [12, 14, 16]
