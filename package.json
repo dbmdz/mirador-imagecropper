@@ -41,7 +41,7 @@
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.61",
-    "eslint": "^8.26.0",
+    "eslint": "^8.27.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
@@ -58,7 +58,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "redux-saga": "^1.2.1",
-    "reselect": "^4.1.6"
+    "reselect": "^4.1.7"
   },
   "peerDependencies": {
     "@material-ui/core": "^4.11.4",
