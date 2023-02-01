@@ -35,29 +35,29 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "material-ui-image": "^3.3.2",
-    "react-rnd": "^10.3.5"
+    "react-rnd": "^10.4.1"
   },
   "devDependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/lab": "^4.0.0-alpha.61",
-    "eslint": "^8.27.0",
+    "eslint": "^8.33.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-simple-import-sort": "^8.0.0",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
     "mirador": "^3.3.0",
     "nwb": "0.25.x",
     "openseadragon": "^2.4.2",
-    "prettier": "^2.7.1",
+    "prettier": "^2.8.3",
     "prop-types": "^15.8.1",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
-    "redux-saga": "^1.2.1",
+    "redux-saga": "^1.2.2",
     "reselect": "^4.1.7"
   },
   "peerDependencies": {
