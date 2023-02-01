@@ -17,7 +17,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run build --if-present
       # there are no real tests at the moment
       #- run: npm run test:coverage
