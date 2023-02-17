@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright © 2021 Bavarian State Library/Munich Digitization Centre
+Copyright © 2021-2023 Bavarian State Library/Munich Digitization Centre
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
