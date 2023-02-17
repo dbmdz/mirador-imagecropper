@@ -9,4 +9,16 @@ module.exports = {
       },
     },
   },
+  webpack: {
+    rules: {
+      babel: {
+        test: /\.jsx?/,
+      },
+    },
+    extra: {
+      resolve: {
+        extensions: [".js", ".jsx"],
+      },
+    },
+  },
 };
