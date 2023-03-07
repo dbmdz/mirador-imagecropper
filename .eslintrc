@@ -8,6 +8,9 @@
     "airbnb",
     "plugin:prettier/recommended"
   ],
+  "overrides": [{
+    "files": ["*.js", "*.jsx"]
+  }],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
