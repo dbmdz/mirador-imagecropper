@@ -46,6 +46,10 @@ const ShareButton = ({
   );
 };
 
+ShareButton.defaultProps = {
+  attribution: undefined,
+};
+
 ShareButton.propTypes = {
   attribution: PropTypes.string,
   imageUrl: PropTypes.string.isRequired,
@@ -53,10 +57,6 @@ ShareButton.propTypes = {
   provider: PropTypes.string.isRequired,
   thumbnailUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-};
-
-ShareButton.defaultProps = {
-  attribution: undefined,
 };
 
 export default ShareButton;

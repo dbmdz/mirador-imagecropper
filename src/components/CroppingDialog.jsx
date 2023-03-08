@@ -298,6 +298,13 @@ const CroppingDialog = ({
   );
 };
 
+CroppingDialog.defaultProps = {
+  currentCanvas: undefined,
+  label: "",
+  requiredStatement: [],
+  rights: [],
+};
+
 CroppingDialog.propTypes = {
   config: PropTypes.shape({
     active: PropTypes.bool.isRequired,
@@ -332,13 +339,6 @@ CroppingDialog.propTypes = {
   updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
   windowId: PropTypes.string.isRequired,
-};
-
-CroppingDialog.defaultProps = {
-  currentCanvas: undefined,
-  label: "",
-  requiredStatement: [],
-  rights: [],
 };
 
 export default CroppingDialog;
