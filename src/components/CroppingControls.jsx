@@ -5,13 +5,13 @@ import React from "react";
 
 /** Renders the button to (de)activate the cropping overlay */
 const CroppingControls = ({
+  config,
   containerId,
-  options,
   t,
-  updateOptions,
+  updateConfig,
   viewType,
 }) => {
-  const { active, enabled } = options;
+  const { active, enabled } = config;
   if (!enabled || viewType !== "single") {
     return null;
   }
@@ -25,8 +25,8 @@ const CroppingControls = ({
       color={active ? "primary" : "default"}
       containerId={containerId}
       onClick={() =>
-        updateOptions({
-          ...options,
+        updateConfig({
+          ...config,
           active: !active,
         })
       }
@@ -37,13 +37,13 @@ const CroppingControls = ({
 };
 
 CroppingControls.propTypes = {
-  containerId: PropTypes.string.isRequired,
-  options: PropTypes.shape({
+  config: PropTypes.shape({
     active: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
+  containerId: PropTypes.string.isRequired,
   t: PropTypes.func.isRequired,
-  updateOptions: PropTypes.func.isRequired,
+  updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
 };
 

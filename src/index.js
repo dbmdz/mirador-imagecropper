@@ -19,10 +19,7 @@ import translations from "./locales";
 import { setCroppingRegion } from "./state/actions";
 import { croppingRegionsReducer } from "./state/reducers";
 import croppingRegionsSaga from "./state/sagas";
-import {
-  getCroppingRegionForWindow,
-  getWindowImageCropperOptions,
-} from "./state/selectors";
+import { getCroppingRegionForWindow, getPluginConfig } from "./state/selectors";
 
 export default [
   {
@@ -31,12 +28,12 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
-      updateOptions: (options) =>
-        dispatch(updateWindow(windowId, { imageCropper: options })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => ({
+      config: getPluginConfig(state, { windowId }),
       containerId: getContainerId(state),
-      options: getWindowImageCropperOptions(state, { windowId }),
       viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
@@ -48,8 +45,8 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
-      updateOptions: (options) =>
-        dispatch(updateWindow(windowId, { imageCropper: options })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => {
       const canvasWorld = getCurrentCanvasWorld(state, { windowId });
@@ -58,11 +55,11 @@ export default [
       );
 
       return {
+        config: getPluginConfig(state, { windowId }),
         containerId: getContainerId(state),
         croppingRegion: getCroppingRegionForWindow(state, { windowId }),
         currentCanvas: getCurrentCanvas(state, { windowId }),
         imageServiceIds,
-        options: getWindowImageCropperOptions(state, { windowId }),
         requiredStatement: getRequiredStatement(state, { windowId }),
         rights: getRights(state, { windowId }),
         viewType: getWindowViewType(state, { windowId }),
@@ -83,14 +80,14 @@ export default [
       setCroppingRegion: (region) => {
         dispatch(setCroppingRegion(windowId, region));
       },
-      updateOptions: (options) =>
-        dispatch(updateWindow(windowId, { imageCropper: options })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => ({
+      config: getPluginConfig(state, { windowId }),
       containerId: getContainerId(state),
       croppingRegion: getCroppingRegionForWindow(state, { windowId }),
       currentCanvas: getCurrentCanvas(state, { windowId }),
-      options: getWindowImageCropperOptions(state, { windowId }),
       viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",

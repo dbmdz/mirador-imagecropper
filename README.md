@@ -36,13 +36,13 @@ const miradorConfig = {
   window: {
     // ....
     imageCropper: {
-      // Global options for all windows, see available settings below
+      // Global config for all windows, see available settings below
     },
   },
   windows: [{
     // ....
     imageCropper: {
-      // Options for an individual window, see available settings below
+      // config for an individual window, see available settings below
     },
   }, // ...
 }
@@ -50,7 +50,7 @@ const miradorConfig = {
 
 You can view an example configuration in [demo/src/index.js][demo-cfg].
 
-The available configuration options are:
+The available settings are:
 
 - `active`: If the cropping overlay is active. Boolean, defaults to `false`.
 - `dialogOpen`: If the settings dialog is open. Boolean, defaults to `false`.

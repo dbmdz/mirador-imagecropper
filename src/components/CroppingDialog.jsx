@@ -71,16 +71,16 @@ const supportsClipboard = "clipboard" in navigator;
 
 /** Renders the dialog where some IIIF parameters can be defined */
 const CroppingDialog = ({
+  config,
   containerId,
   croppingRegion: { imageCoordinates },
   currentCanvas,
   imageServiceIds,
   label,
-  options,
   requiredStatement,
   rights,
   t,
-  updateOptions,
+  updateConfig,
   viewType,
   windowId,
 }) => {
@@ -90,7 +90,7 @@ const CroppingDialog = ({
     enabled,
     roundingPrecision,
     showRightsInformation,
-  } = options;
+  } = config;
   const [copiedToClipboard, setCopiedToClipboard] = useState(false);
   const [mirrored, setMirrored] = useState(false);
   const [quality, setQuality] = useState("default");
@@ -117,8 +117,8 @@ const CroppingDialog = ({
     return null;
   }
   const closeDialog = () =>
-    updateOptions({
-      ...options,
+    updateConfig({
+      ...config,
       dialogOpen: false,
     });
   const attribution = getAttributionString(requiredStatement);
@@ -299,6 +299,13 @@ const CroppingDialog = ({
 };
 
 CroppingDialog.propTypes = {
+  config: PropTypes.shape({
+    active: PropTypes.bool.isRequired,
+    dialogOpen: PropTypes.bool.isRequired,
+    enabled: PropTypes.bool.isRequired,
+    roundingPrecision: PropTypes.number.isRequired,
+    showRightsInformation: PropTypes.bool.isRequired,
+  }).isRequired,
   containerId: PropTypes.string.isRequired,
   croppingRegion: PropTypes.shape({
     imageCoordinates: PropTypes.shape({
@@ -315,13 +322,6 @@ CroppingDialog.propTypes = {
   }),
   imageServiceIds: PropTypes.arrayOf(PropTypes.string).isRequired,
   label: PropTypes.string,
-  options: PropTypes.shape({
-    active: PropTypes.bool.isRequired,
-    dialogOpen: PropTypes.bool.isRequired,
-    enabled: PropTypes.bool.isRequired,
-    roundingPrecision: PropTypes.number.isRequired,
-    showRightsInformation: PropTypes.bool.isRequired,
-  }).isRequired,
   requiredStatement: PropTypes.arrayOf(
     PropTypes.shape({
       values: PropTypes.arrayOf(PropTypes.string),
@@ -329,7 +329,7 @@ CroppingDialog.propTypes = {
   ),
   rights: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func.isRequired,
-  updateOptions: PropTypes.func.isRequired,
+  updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
   windowId: PropTypes.string.isRequired,
 };

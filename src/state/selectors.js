@@ -28,8 +28,8 @@ export const getCroppingRegionForWindow = (state, { windowId }) => {
   return regions[windowId] ?? defaultRegion;
 };
 
-/** Selector to get text display options for a given window */
-export const getWindowImageCropperOptions = createSelector(
+/** Selector to get the plugin config for a given window */
+export const getPluginConfig = createSelector(
   [getWindowConfig],
   ({ imageCropper = {} }) => {
     let { roundingPrecision } = imageCropper;

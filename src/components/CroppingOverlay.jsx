@@ -89,19 +89,19 @@ const useStyles = makeStyles(() => ({
 
 /** Renders the overlay used for defining the cropping region by dragging and resizing */
 const CroppingOverlay = ({
+  config,
   containerId,
   croppingRegion,
   currentCanvas,
-  options,
   resetRotation,
   setCroppingRegion,
   t,
-  updateOptions,
+  updateConfig,
   viewer,
   viewerConfig,
   viewType,
 }) => {
-  const { active, dialogOpen, enabled } = options;
+  const { active, dialogOpen, enabled } = config;
   const isInitialRenderOfCanvas = Object.entries(croppingRegion)
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
@@ -225,8 +225,8 @@ const CroppingOverlay = ({
           setCroppingRegion({
             imageCoordinates: toImageCoordinates(currentImage, croppingRegion),
           });
-          updateOptions({
-            ...options,
+          updateConfig({
+            ...config,
             dialogOpen: true,
           });
         }}
@@ -239,6 +239,11 @@ const CroppingOverlay = ({
 };
 
 CroppingOverlay.propTypes = {
+  config: PropTypes.shape({
+    active: PropTypes.bool.isRequired,
+    dialogOpen: PropTypes.bool.isRequired,
+    enabled: PropTypes.bool.isRequired,
+  }).isRequired,
   containerId: PropTypes.string.isRequired,
   croppingRegion: PropTypes.shape({
     x: PropTypes.number,
@@ -250,15 +255,10 @@ CroppingOverlay.propTypes = {
     getHeight: PropTypes.func.isRequired,
     getWidth: PropTypes.func.isRequired,
   }),
-  options: PropTypes.shape({
-    active: PropTypes.bool.isRequired,
-    dialogOpen: PropTypes.bool.isRequired,
-    enabled: PropTypes.bool.isRequired,
-  }).isRequired,
   resetRotation: PropTypes.func.isRequired,
   setCroppingRegion: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  updateOptions: PropTypes.func.isRequired,
+  updateConfig: PropTypes.func.isRequired,
   viewer: PropTypes.shape({
     world: PropTypes.shape({
       getItemAt: PropTypes.func.isRequired,
