@@ -5,11 +5,13 @@ import { setCroppingRegion } from "./actions";
 import { defaultRegion } from "./selectors";
 
 /** Resets the region to default values on canvas change */
-export function* initalizeRegion({ windowId }) {
+function* initalizeRegion({ windowId }) {
   yield put(setCroppingRegion(windowId, defaultRegion));
 }
 
 /** Root saga for the plugin */
-export default function* croppingRegionsSaga() {
+function* croppingRegionsSaga() {
   yield all([takeEvery(ActionTypes.SET_CANVAS, initalizeRegion)]);
 }
+
+export default croppingRegionsSaga;

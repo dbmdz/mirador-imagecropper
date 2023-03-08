@@ -15,7 +15,7 @@ const defaultConfig = {
   showRightsInformation: true,
 };
 
-export const defaultRegion = {
+const defaultRegion = {
   x: 0,
   y: 0,
   w: 0,
@@ -23,13 +23,13 @@ export const defaultRegion = {
 };
 
 /** Selector to get the current cropping region for a given window */
-export const getCroppingRegionForWindow = (state, { windowId }) => {
+const getCroppingRegionForWindow = (state, { windowId }) => {
   const regions = miradorSlice(state).croppingRegions ?? {};
   return regions[windowId] ?? defaultRegion;
 };
 
 /** Selector to get the plugin config for a given window */
-export const getPluginConfig = createSelector(
+const getPluginConfig = createSelector(
   [getWindowConfig],
   ({ imageCropper = {} }) => {
     let { roundingPrecision } = imageCropper;
@@ -47,3 +47,5 @@ export const getPluginConfig = createSelector(
     };
   }
 );
+
+export { defaultRegion, getCroppingRegionForWindow, getPluginConfig };

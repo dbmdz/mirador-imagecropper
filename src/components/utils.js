@@ -1,5 +1,5 @@
 /** Constructs the attribution string from the data given in the manifest */
-export function getAttributionString(requiredStatement) {
+const getAttributionString = (requiredStatement) => {
   if (!requiredStatement.length) {
     return null;
   }
@@ -8,16 +8,10 @@ export function getAttributionString(requiredStatement) {
     (acc, current) => `${acc}, ${current.values.join(", ")}`,
     initial.values.join(", ")
   );
-}
+};
 
 /** Constructs a share link for the given content and provider */
-export function getShareLink(
-  attribution,
-  imageUrl,
-  label,
-  provider,
-  thumbnailUrl
-) {
+const getShareLink = (attribution, imageUrl, label, provider, thumbnailUrl) => {
   let text = label;
   if (attribution) {
     text += ` (${attribution})`;
@@ -38,4 +32,6 @@ export function getShareLink(
     default:
       return null;
   }
-}
+};
+
+export { getAttributionString, getShareLink };
