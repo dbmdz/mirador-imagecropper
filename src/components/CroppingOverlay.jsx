@@ -63,11 +63,12 @@ const useStyles = makeStyles(() => ({
   dialogButton: {
     backgroundColor: "rgba(255,255,255,0.8) !important",
     borderRadius: "25%",
+    color: "rgba(0, 0, 0, 0.54) !important",
+    left: "0",
+    position: ({ buttonOutside }) => buttonOutside && "absolute",
+    top: "5px",
     transform: ({ buttonOutside }) =>
       buttonOutside ? "translateX(calc(-100% - 5px))" : "translateX(5px)",
-    position: ({ buttonOutside }) => buttonOutside && "absolute",
-    left: "0",
-    top: "5px",
   },
   resizeHandle: {
     background: "white",
