@@ -5,6 +5,9 @@
 
 A Mirador 3 plugin to retrieve the image url for the selected area.
 
+![Screenshot1][screenshot1]
+![Screenshot2][screenshot2]
+
 ## Installation
 
 Currently the plugin can only be used if you build your own Mirador JavaScript bundle.
@@ -75,3 +78,5 @@ starting the work, so we can discuss if it's a fit.
 [mirador-badge]: https://img.shields.io/badge/Mirador-%E2%89%A53.1.1-blueviolet
 [npm]: https://www.npmjs.org/package/mirador-imagecropper
 [npm-badge]: https://img.shields.io/npm/v/mirador-imagecropper.png?style=flat-square
+[screenshot1]: .docassets/screenshot1.png
+[screenshot2]: .docassets/screenshot2.png
