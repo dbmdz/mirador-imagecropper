@@ -64,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: theme.spacing(1),
   },
   previewLink: {
-    fontFamily: "sans-serif",
+    fontFamily: theme.typography.fontFamily ?? "sans-serif",
   },
 }));
 
