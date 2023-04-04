@@ -1,5 +1,5 @@
 import ActionTypes from "mirador/dist/es/src/state/actions/action-types";
-import { all, put, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 import { setCroppingRegion } from "./actions";
 import { defaultRegion } from "./selectors";
@@ -11,7 +11,7 @@ function* initalizeRegion({ windowId }) {
 
 /** Root saga for the plugin */
 function* croppingRegionsSaga() {
-  yield all([takeEvery(ActionTypes.SET_CANVAS, initalizeRegion)]);
+  yield takeEvery(ActionTypes.SET_CANVAS, initalizeRegion);
 }
 
 export default croppingRegionsSaga;
