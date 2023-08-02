@@ -47,7 +47,7 @@
     "eslint-plugin-simple-import-sort": "^10.0.0",
     "mirador": "^3.3.0",
     "nwb": "^0.25.2",
-    "prettier": "^2.8.8",
+    "prettier": "^3.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0"
   },
