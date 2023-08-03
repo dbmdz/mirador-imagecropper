@@ -6,7 +6,7 @@ const getAttributionString = (requiredStatement) => {
   const initial = requiredStatement.shift();
   return requiredStatement.reduce(
     (acc, current) => `${acc}, ${current.values.join(", ")}`,
-    initial.values.join(", ")
+    initial.values.join(", "),
   );
 };
 

@@ -45,7 +45,7 @@ const getPluginConfig = createSelector(
       ...imageCropper,
       roundingPrecision,
     };
-  }
+  },
 );
 
 export { defaultRegion, getCroppingRegionForWindow, getPluginConfig };

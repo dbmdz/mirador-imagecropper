@@ -31,7 +31,7 @@ const ShareButton = ({
     imageUrl,
     label,
     provider,
-    thumbnailUrl
+    thumbnailUrl,
   );
   const ProviderIcon = iconMapping[provider];
   return (

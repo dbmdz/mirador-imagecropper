@@ -11,7 +11,7 @@ const getImageBounds = (image, width, height) => {
   const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
   const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
   const bottomLeft = image.imageToViewerElementCoordinates(
-    new Point(0, height)
+    new Point(0, height),
   );
   return {
     x: Math.ceil(topLeft.x),
@@ -141,7 +141,7 @@ const CroppingOverlay = ({
   /* Set initial region dependant on the current image if this is the initial render for the canvas */
   if (currentImage && isInitialRenderOfCanvas) {
     setCroppingRegion(
-      getInitialRegion(currentImage, canvasWidth, canvasHeight)
+      getInitialRegion(currentImage, canvasWidth, canvasHeight),
     );
   }
   const ResizeHandle = <div className={resizeHandle} />;
@@ -156,7 +156,7 @@ const CroppingOverlay = ({
         const imageBounds = getImageBounds(
           currentImage,
           canvasWidth,
-          canvasHeight
+          canvasHeight,
         );
         if (
           isInsideImage(imageBounds, {
@@ -182,12 +182,12 @@ const CroppingOverlay = ({
         _dir,
         { offsetHeight: h, offsetWidth: w },
         _delta,
-        { x, y }
+        { x, y },
       ) => {
         const imageBounds = getImageBounds(
           currentImage,
           canvasWidth,
-          canvasHeight
+          canvasHeight,
         );
         if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });

@@ -128,7 +128,7 @@ const CroppingDialog = ({
     imageCoordinates,
     canvasWidth,
     canvasHeight,
-    roundingPrecision
+    roundingPrecision,
   );
   const region = `pct:${x},${y},${w},${h}`;
   const mirror = mirrored ? "!" : "";
@@ -287,7 +287,7 @@ const CroppingDialog = ({
                 thumbnailUrl={getPreviewUrl(250)}
                 title={t(`imageCropper.share.${p}`)}
               />
-            )
+            ),
           )}
         </ButtonGroup>
         <Button color="primary" onClick={closeDialog}>
@@ -332,7 +332,7 @@ CroppingDialog.propTypes = {
   requiredStatement: PropTypes.arrayOf(
     PropTypes.shape({
       values: PropTypes.arrayOf(PropTypes.string),
-    })
+    }),
   ),
   rights: PropTypes.arrayOf(PropTypes.string),
   t: PropTypes.func.isRequired,

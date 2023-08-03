@@ -51,7 +51,7 @@ export default [
     mapStateToProps: (state, { windowId }) => {
       const canvasWorld = getCurrentCanvasWorld(state, { windowId });
       const imageServiceIds = flatten(
-        canvasWorld.canvases.map((c) => c.imageServiceIds)
+        canvasWorld.canvases.map((c) => c.imageServiceIds),
       );
 
       return {
