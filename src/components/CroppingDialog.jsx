@@ -276,19 +276,17 @@ const CroppingDialog = ({
       </ScrollIndicatedDialogContent>
       <DialogActions className={actions}>
         <ButtonGroup className={actionButtons}>
-          {["envelope", "facebook", "pinterest", "twitter", "whatsapp"].map(
-            (p) => (
-              <ShareButton
-                attribution={attribution}
-                imageUrl={imageUrl}
-                key={p}
-                label={label}
-                provider={p}
-                thumbnailUrl={getPreviewUrl(250)}
-                title={t(`imageCropper.share.${p}`)}
-              />
-            ),
-          )}
+          {["envelope", "facebook", "pinterest", "x", "whatsapp"].map((p) => (
+            <ShareButton
+              attribution={attribution}
+              imageUrl={imageUrl}
+              key={p}
+              label={label}
+              provider={p}
+              thumbnailUrl={getPreviewUrl(250)}
+              title={t(`imageCropper.share.${p}`)}
+            />
+          ))}
         </ButtonGroup>
         <Button color="primary" onClick={closeDialog}>
           {t("imageCropper.close")}

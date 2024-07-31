@@ -1,20 +1,20 @@
 import FacebookIcon from "@material-ui/icons/Facebook";
 import MailIcon from "@material-ui/icons/Mail";
 import PinterestIcon from "@material-ui/icons/Pinterest";
-import TwitterIcon from "@material-ui/icons/Twitter";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import PropTypes from "prop-types";
 import React from "react";
 
+import XIcon from "../icons/XIcon";
 import { getShareLink } from "../utils";
 
 const iconMapping = {
   envelope: MailIcon,
   facebook: FacebookIcon,
   pinterest: PinterestIcon,
-  twitter: TwitterIcon,
   whatsapp: WhatsAppIcon,
+  x: XIcon,
 };
 
 /** Renders a button for sharing the given content on one of the supported providers */

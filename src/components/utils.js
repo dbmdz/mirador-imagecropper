@@ -23,12 +23,12 @@ const getShareLink = (attribution, imageUrl, label, provider, thumbnailUrl) => {
       return `https://www.facebook.com/sharer/sharer.php?title=${text}&u=${imageUrl}`;
     case "pinterest":
       return `http://pinterest.com/pin/create/bookmarklet/?url=${imageUrl}&description=${text}&media=${thumbnailUrl}`;
-    case "twitter":
-      return `https://twitter.com/intent/tweet?text=${
-        text.length > 60 ? `${text.substring(0, 60)}...` : text
-      }&url=${imageUrl}&hashtags=iiif`;
     case "whatsapp":
       return `whatsapp://send?text=${text}: ${imageUrl}`;
+    case "x":
+      return `https://x.com/intent/post?text=${
+        text.length > 60 ? `${text.substring(0, 60)}...` : text
+      }&url=${imageUrl}&hashtags=iiif`;
     default:
       return null;
   }
