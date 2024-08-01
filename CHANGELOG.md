@@ -16,6 +16,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) 
 
 - Fixed `engine` restriction
 
+### Fixed
+
+- Fixed rendering issue
+
 ## [0.1.7](https://github.com/dbmdz/mirador-imagecropper/releases/tag/0.1.7) - 2023-03-23
 
 ### Changed

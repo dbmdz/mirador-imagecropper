@@ -103,6 +103,9 @@ const CroppingOverlay = ({
   viewType,
 }) => {
   const { active, dialogOpen, enabled } = config;
+  const canvasWidth = currentCanvas?.getWidth();
+  const canvasHeight = currentCanvas?.getHeight();
+  const currentImage = viewer?.world?.getItemAt(0);
   const isInitialRenderOfCanvas = Object.entries(croppingRegion)
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
@@ -111,15 +114,15 @@ const CroppingOverlay = ({
   useEffect(() => {
     if (isInitialRenderOfCanvas) {
       setButtonOutside(true);
+      /* Set initial region dependant on the current image if this is the initial render for the canvas */
+      if (currentCanvas && currentImage) {
+        setCroppingRegion(
+          getInitialRegion(currentImage, canvasWidth, canvasHeight),
+        );
+      }
     }
-  }, [isInitialRenderOfCanvas]);
-  if (
-    !enabled ||
-    !active ||
-    !viewer ||
-    !currentCanvas ||
-    viewType !== "single"
-  ) {
+  }, [currentCanvas, currentImage, isInitialRenderOfCanvas]);
+  if (!enabled || !active || viewType !== "single") {
     return null;
   }
   /*
@@ -134,15 +137,6 @@ const CroppingOverlay = ({
    */
   if (rotation !== 0) {
     resetRotation();
-  }
-  const canvasWidth = currentCanvas.getWidth();
-  const canvasHeight = currentCanvas.getHeight();
-  const currentImage = viewer.world.getItemAt(0);
-  /* Set initial region dependant on the current image if this is the initial render for the canvas */
-  if (currentImage && isInitialRenderOfCanvas) {
-    setCroppingRegion(
-      getInitialRegion(currentImage, canvasWidth, canvasHeight),
-    );
   }
   const ResizeHandle = <div className={resizeHandle} />;
   return (
