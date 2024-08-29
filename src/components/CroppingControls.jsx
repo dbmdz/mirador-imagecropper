@@ -1,28 +1,22 @@
-import CropIcon from "@material-ui/icons/Crop";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
-import PropTypes from "prop-types";
-import React from "react";
+import React from 'react';
+
+import CropIcon from '@mui/icons-material/Crop';
+
+import { MiradorMenuButton } from 'mirador/dist/es/src/components/MiradorMenuButton';
+import PropTypes from 'prop-types';
 
 /** Renders the button to (de)activate the cropping overlay */
-const CroppingControls = ({
-  config,
-  containerId,
-  t,
-  updateConfig,
-  viewType,
-}) => {
+const CroppingControls = ({ config, containerId, t, updateConfig, viewType }) => {
   const { active, enabled } = config;
-  if (!enabled || viewType !== "single") {
+  if (!enabled || viewType !== 'single') {
     return null;
   }
   return (
     <MiradorMenuButton
       aria-expanded={active}
       aria-haspopup
-      aria-label={
-        active ? t("imageCropper.deactivate") : t("imageCropper.activate")
-      }
-      color={active ? "primary" : "default"}
+      aria-label={active ? t('imageCropper.deactivate') : t('imageCropper.activate')}
+      color={active ? 'primary' : 'default'}
       containerId={containerId}
       onClick={() =>
         updateConfig({

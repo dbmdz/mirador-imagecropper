@@ -1,6 +1,6 @@
-import { getWindowConfig } from "mirador/dist/es/src/state/selectors";
-import { miradorSlice } from "mirador/dist/es/src/state/selectors/utils";
-import { createSelector } from "reselect";
+import { getWindowConfig } from 'mirador/dist/es/src/state/selectors';
+import { miradorSlice } from 'mirador/dist/es/src/state/selectors/utils';
+import { createSelector } from 'reselect';
 
 const defaultConfig = {
   // Activate the image cropping overlay
@@ -29,23 +29,16 @@ const getCroppingRegionForWindow = (state, { windowId }) => {
 };
 
 /** Selector to get the plugin config for a given window */
-const getPluginConfig = createSelector(
-  [getWindowConfig],
-  ({ imageCropper = {} }) => {
-    let { roundingPrecision } = imageCropper;
-    if (
-      typeof roundingPrecision !== "number" ||
-      roundingPrecision < 0 ||
-      roundingPrecision > 20
-    ) {
-      roundingPrecision = 5;
-    }
-    return {
-      ...defaultConfig,
-      ...imageCropper,
-      roundingPrecision,
-    };
-  },
-);
+const getPluginConfig = createSelector([getWindowConfig], ({ imageCropper = {} }) => {
+  let { roundingPrecision } = imageCropper;
+  if (typeof roundingPrecision !== 'number' || roundingPrecision < 0 || roundingPrecision > 20) {
+    roundingPrecision = 5;
+  }
+  return {
+    ...defaultConfig,
+    ...imageCropper,
+    roundingPrecision,
+  };
+});
 
 export { defaultRegion, getCroppingRegionForWindow, getPluginConfig };

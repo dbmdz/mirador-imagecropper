@@ -1,4 +1,4 @@
-import { PluginActionTypes } from "./actions";
+import { PluginActionTypes } from './actions';
 
 /**
  * Updates the global state of the plugin

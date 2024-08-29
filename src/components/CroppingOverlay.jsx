@@ -1,18 +1,17 @@
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import ShareIcon from "@material-ui/icons/Share";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
-import { Point } from "openseadragon";
-import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
-import { Rnd } from "react-rnd";
+import React, { useEffect, useState } from 'react';
+
+import { MiradorMenuButton } from 'mirador/dist/es/src/components/MiradorMenuButton';
+import { Point } from 'openseadragon';
+import PropTypes from 'prop-types';
+import { Rnd } from 'react-rnd';
+import { styled } from '@mui/material/styles';
+import ShareIcon from '@mui/icons-material/Share';
 
 /** Converts the corner points of the image to coordinates in the browser */
 const getImageBounds = (image, width, height) => {
   const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
   const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
-  const bottomLeft = image.imageToViewerElementCoordinates(
-    new Point(0, height),
-  );
+  const bottomLeft = image.imageToViewerElementCoordinates(new Point(0, height));
   return {
     x: Math.ceil(topLeft.x),
     y: Math.ceil(topLeft.y),
@@ -37,14 +36,8 @@ const getInitialRegion = (image, width, height) => {
 };
 
 /** Checks if the given region is inside the bounds of the image */
-const isInsideImage = (bounds, { x, y, w, h }) => {
-  return (
-    x >= bounds.x &&
-    y >= bounds.y &&
-    x + w <= bounds.x + bounds.w &&
-    y + h <= bounds.y + bounds.h
-  );
-};
+const isInsideImage = (bounds, { x, y, w, h }) =>
+  x >= bounds.x && y >= bounds.y && x + w <= bounds.x + bounds.w && y + h <= bounds.y + bounds.h;
 
 /** Converts the given region in browser coordinates to image coordinates */
 const toImageCoordinates = (image, { x, y, w, h }) => {
@@ -59,34 +52,32 @@ const toImageCoordinates = (image, { x, y, w, h }) => {
   };
 };
 
-const useStyles = makeStyles(() => ({
-  dialogButton: {
-    backgroundColor: "rgba(255,255,255,0.8) !important",
-    borderRadius: "25%",
-    color: "rgba(0, 0, 0, 0.54) !important",
-    left: "0",
-    position: ({ buttonOutside }) => buttonOutside && "absolute",
-    top: "5px",
-    transform: ({ buttonOutside }) =>
-      buttonOutside ? "translateX(calc(-100% - 5px))" : "translateX(5px)",
-  },
-  resizeHandle: {
-    background: "white",
-    border: "2px solid gray",
-    boxSizing: "border-box",
-    height: "50%",
-    left: "25%",
-    position: "absolute",
-    top: "25%",
-    width: "50%",
-  },
-  root: {
-    border: "1px dashed black",
-    boxShadow: "0 0 0 9999em rgba(0, 0, 0, 0.65)",
-    position: "absolute",
-    zIndex: "1",
-  },
+const StyledMenuButton = styled(MiradorMenuButton)(({ buttonOutside }) => ({
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  borderRadius: '25%',
+  color: 'rgba(0, 0, 0, 0.54)',
+  left: '0',
+  top: '5px',
+  position: buttonOutside ? 'absolute' : 'relative',
+  transform: buttonOutside ? 'translateX(calc(-100% - 5px))' : 'translateX(5px)',
 }));
+
+const StyledRnd = styled(Rnd)({
+  border: '1px dashed black',
+  boxShadow: '0 0 0 9999em rgba(0, 0, 0, 0.65)',
+  position: 'absolute',
+  zIndex: '1',
+});
+const StyledResizeHandle = styled('div')({
+  background: 'white',
+  border: '2px solid gray',
+  boxSizing: 'border-box',
+  height: '50%',
+  left: '25%',
+  position: 'absolute',
+  top: '25%',
+  width: '50%',
+});
 
 /** Renders the overlay used for defining the cropping region by dragging and resizing */
 const CroppingOverlay = ({
@@ -104,22 +95,15 @@ const CroppingOverlay = ({
 }) => {
   const { active, dialogOpen, enabled } = config;
   const isInitialRenderOfCanvas = Object.entries(croppingRegion)
-    .filter(([k]) => k !== "imageCoordinates")
+    .filter(([k]) => k !== 'imageCoordinates')
     .every(([, v]) => v === 0);
   const [buttonOutside, setButtonOutside] = useState(true);
-  const { dialogButton, resizeHandle, root } = useStyles({ buttonOutside });
   useEffect(() => {
     if (isInitialRenderOfCanvas) {
       setButtonOutside(true);
     }
   }, [isInitialRenderOfCanvas]);
-  if (
-    !enabled ||
-    !active ||
-    !viewer ||
-    !currentCanvas ||
-    viewType !== "single"
-  ) {
+  if (!enabled || !active || !viewer || !currentCanvas || viewType !== 'single') {
     return null;
   }
   /*
@@ -140,24 +124,17 @@ const CroppingOverlay = ({
   const currentImage = viewer.world.getItemAt(0);
   /* Set initial region dependant on the current image if this is the initial render for the canvas */
   if (currentImage && isInitialRenderOfCanvas) {
-    setCroppingRegion(
-      getInitialRegion(currentImage, canvasWidth, canvasHeight),
-    );
+    setCroppingRegion(getInitialRegion(currentImage, canvasWidth, canvasHeight));
   }
-  const ResizeHandle = <div className={resizeHandle} />;
+  const ResizeHandle = <StyledResizeHandle />;
   return (
-    <Rnd
+    <StyledRnd
       bounds="parent"
-      cancel={`.${dialogButton.split(" ")[0]}`}
-      className={root}
+      cancel={`.${StyledMenuButton.styledComponentId}`}
       minHeight={50}
       minWidth={50}
       onDrag={(_evt, { x, y }) => {
-        const imageBounds = getImageBounds(
-          currentImage,
-          canvasWidth,
-          canvasHeight,
-        );
+        const imageBounds = getImageBounds(currentImage, canvasWidth, canvasHeight);
         if (
           isInsideImage(imageBounds, {
             ...croppingRegion,
@@ -177,18 +154,8 @@ const CroppingOverlay = ({
           }
         }
       }}
-      onResize={(
-        _evt,
-        _dir,
-        { offsetHeight: h, offsetWidth: w },
-        _delta,
-        { x, y },
-      ) => {
-        const imageBounds = getImageBounds(
-          currentImage,
-          canvasWidth,
-          canvasHeight,
-        );
+      onResize={(_evt, _dir, { offsetHeight: h, offsetWidth: w }, _delta, { x, y }) => {
+        const imageBounds = getImageBounds(currentImage, canvasWidth, canvasHeight);
         if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });
           /*
@@ -217,10 +184,10 @@ const CroppingOverlay = ({
         width: croppingRegion.w,
       }}
     >
-      <MiradorMenuButton
+      <StyledMenuButton
+        buttonOutside={buttonOutside}
         aria-expanded={dialogOpen}
-        aria-label={t("imageCropper.openDialog")}
-        className={dialogButton}
+        aria-label={t('imageCropper.openDialog')}
         containerId={containerId}
         onClick={() => {
           setCroppingRegion({
@@ -234,8 +201,8 @@ const CroppingOverlay = ({
         size="small"
       >
         <ShareIcon />
-      </MiradorMenuButton>
-    </Rnd>
+      </StyledMenuButton>
+    </StyledRnd>
   );
 };
 

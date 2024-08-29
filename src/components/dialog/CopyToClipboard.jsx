@@ -1,8 +1,8 @@
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
-import PropTypes from "prop-types";
-import React from "react";
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import InputAdornment from '@mui/material/InputAdornment';
+import { MiradorMenuButton } from 'mirador/dist/es/src/components/MiradorMenuButton';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 /** Renders the button for copying the image url to the clipboard */
 const CopyToClipboard = ({ onCopy, supported, t }) => {
@@ -11,11 +11,7 @@ const CopyToClipboard = ({ onCopy, supported, t }) => {
   }
   return (
     <InputAdornment>
-      <MiradorMenuButton
-        aria-label={t("imageCropper.copyToClipboard")}
-        edge="end"
-        onClick={onCopy}
-      >
+      <MiradorMenuButton aria-label={t('imageCropper.copyToClipboard')} edge="end" onClick={onCopy}>
         <FileCopyIcon fontSize="small" />
       </MiradorMenuButton>
     </InputAdornment>

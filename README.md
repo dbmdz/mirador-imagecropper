@@ -3,7 +3,7 @@
 [![npm package][npm-badge]][npm]
 [![required Mirador version][mirador-badge]][mirador]
 
-A Mirador 3 plugin to retrieve the image url for the selected area.
+A Mirador 4 plugin to retrieve the image url for the selected area.
 
 ![Screenshot1][screenshot1]
 ![Screenshot2][screenshot2]
