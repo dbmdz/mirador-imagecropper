@@ -4,10 +4,10 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import MailIcon from '@mui/icons-material/Mail';
 import PinterestIcon from '@mui/icons-material/Pinterest';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import X from '@mui/icons-material/X';
 
 import { MiradorMenuButton } from 'mirador/dist/es/src/components/MiradorMenuButton';
 import PropTypes from 'prop-types';
-import XIcon from '../icons/XIcon';
 
 import { getShareLink } from '../utils';
 
@@ -16,7 +16,7 @@ const iconMapping = {
   facebook: FacebookIcon,
   pinterest: PinterestIcon,
   whatsapp: WhatsAppIcon,
-  x: XIcon,
+  x: X,
 };
 
 /** Renders a button for sharing the given content on one of the supported providers */
