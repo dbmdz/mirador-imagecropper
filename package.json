@@ -1,11 +1,11 @@
 {
   "name": "mirador-imagecropper",
-  "version": "0.1.9",
-  "description": "Mirador 3 plugin to retrieve the image url for the selected area",
+  "version": "1.0.0-alpha.1",
+  "description": "Mirador 4 plugin to retrieve the image url for the selected area",
   "keywords": [
     "iiif",
     "mirador",
-    "mirador3",
+    "mirador4",
     "mirador-plugin",
     "react-component"
   ],
@@ -33,9 +33,14 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "material-ui-image": "^3.3.2"
+    "@emotion/babel-plugin": "^11.11.0",
+    "@emotion/cache": "^11.11.0",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
+    "mui-image": "^1.0.7"
   },
   "devDependencies": {
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
@@ -45,22 +50,20 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
-    "mirador": "^3.3.0",
+    "mirador": "^4.0.0-alpha.1",
     "nwb": "^0.25.2",
     "prettier": "^3.3.3",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
   },
   "peerDependencies": {
-    "@material-ui/core": "4.x",
-    "@material-ui/icons": "4.x",
-    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/icons-material": "^5.x",
+    "@mui/material": "^5.x",
     "lodash": "4.x",
-    "mirador": "3.x",
+    "mirador": "^4.0.0-alpha.1",
     "openseadragon": "2.x",
-    "prop-types": "15.x",
-    "react": "16.x",
-    "react-dom": "16.x",
+    "react": "18.x",
+    "react-dom": "18.x",
     "react-rnd": "10.x",
     "redux-saga": "1.x",
     "reselect": "4.x"

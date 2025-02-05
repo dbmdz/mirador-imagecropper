@@ -1,4 +1,4 @@
-import CropIcon from "@material-ui/icons/Crop";
+import CropIcon from "@mui/icons-material/Crop";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import PropTypes from "prop-types";
 import React from "react";
