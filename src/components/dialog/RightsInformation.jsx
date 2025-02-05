@@ -1,10 +1,8 @@
-import React from 'react';
-
-import Alert from '@mui/material/Alert';
-import Link from '@mui/material/Link';
-import { styled } from '@mui/material/styles';
-
-import PropTypes from 'prop-types';
+import Alert from "@mui/material/Alert";
+import Link from "@mui/material/Link";
+import { styled } from "@mui/material/styles";
+import PropTypes from "prop-types";
+import React from "react";
 
 const StyledAlert = styled(Alert)(({ theme }) => ({
   marginTop: theme.spacing(2),
@@ -17,7 +15,7 @@ const RightsInformation = ({ rights, t }) => {
   }
   return (
     <StyledAlert severity="warning">
-      <span>{t('imageCropper.noteRights', { count: rights.length })}: </span>
+      <span>{t("imageCropper.noteRights", { count: rights.length })}: </span>
       {rights.length === 1 ? (
         <Link href={rights[0]} rel="noopener" target="_blank">
           {rights[0]}

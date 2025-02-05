@@ -1,5 +1,5 @@
 const PluginActionTypes = {
-  SET_CROPPING_REGION: 'mirador-imagecropper/SET_CROPPING_REGION',
+  SET_CROPPING_REGION: "mirador-imagecropper/SET_CROPPING_REGION",
 };
 
 /**

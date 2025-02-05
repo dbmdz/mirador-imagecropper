@@ -1,8 +1,8 @@
-import ActionTypes from 'mirador/dist/es/src/state/actions/action-types';
-import { put, takeEvery } from 'redux-saga/effects';
+import ActionTypes from "mirador/dist/es/src/state/actions/action-types";
+import { put, takeEvery } from "redux-saga/effects";
 
-import { setCroppingRegion } from './actions';
-import { defaultRegion } from './selectors';
+import { setCroppingRegion } from "./actions";
+import { defaultRegion } from "./selectors";
 
 /** Resets the region to default values on canvas change */
 function* initalizeRegion({ windowId }) {

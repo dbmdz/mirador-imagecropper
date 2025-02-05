@@ -1,5 +1,8 @@
-import flatten from 'lodash/flatten';
-import { updateViewport, updateWindow } from 'mirador/dist/es/src/state/actions';
+import flatten from "lodash/flatten";
+import {
+  updateViewport,
+  updateWindow,
+} from "mirador/dist/es/src/state/actions";
 import {
   getContainerId,
   getCurrentCanvas,
@@ -7,16 +10,16 @@ import {
   getRequiredStatement,
   getRights,
   getWindowViewType,
-} from 'mirador/dist/es/src/state/selectors';
+} from "mirador/dist/es/src/state/selectors";
 
-import CroppingControls from './components/CroppingControls';
-import CroppingDialog from './components/CroppingDialog';
-import CroppingOverlay from './components/CroppingOverlay';
-import translations from './locales';
-import { setCroppingRegion } from './state/actions';
-import { croppingRegionsReducer } from './state/reducers';
-import croppingRegionsSaga from './state/sagas';
-import { getCroppingRegionForWindow, getPluginConfig } from './state/selectors';
+import CroppingControls from "./components/CroppingControls";
+import CroppingDialog from "./components/CroppingDialog";
+import CroppingOverlay from "./components/CroppingOverlay";
+import translations from "./locales";
+import { setCroppingRegion } from "./state/actions";
+import { croppingRegionsReducer } from "./state/reducers";
+import croppingRegionsSaga from "./state/sagas";
+import { getCroppingRegionForWindow, getPluginConfig } from "./state/selectors";
 
 export default [
   {
@@ -25,15 +28,16 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
-      updateConfig: (imageCropper) => dispatch(updateWindow(windowId, { imageCropper })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => ({
       config: getPluginConfig(state, { windowId }),
       containerId: getContainerId(state),
       viewType: getWindowViewType(state, { windowId }),
     }),
-    mode: 'add',
-    target: 'WindowTopBarPluginArea',
+    mode: "add",
+    target: "WindowTopBarPluginArea",
   },
   {
     component: CroppingDialog,
@@ -41,11 +45,14 @@ export default [
       translations,
     },
     mapDispatchToProps: (dispatch, { windowId }) => ({
-      updateConfig: (imageCropper) => dispatch(updateWindow(windowId, { imageCropper })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => {
       const canvasWorld = getCurrentCanvasWorld(state, { windowId });
-      const imageServiceIds = flatten(canvasWorld.canvases.map((c) => c.imageServiceIds));
+      const imageServiceIds = flatten(
+        canvasWorld.canvases.map((c) => c.imageServiceIds),
+      );
 
       return {
         config: getPluginConfig(state, { windowId }),
@@ -58,8 +65,8 @@ export default [
         viewType: getWindowViewType(state, { windowId }),
       };
     },
-    mode: 'add',
-    target: 'Window',
+    mode: "add",
+    target: "Window",
   },
   {
     component: CroppingOverlay,
@@ -73,7 +80,8 @@ export default [
       setCroppingRegion: (region) => {
         dispatch(setCroppingRegion(windowId, region));
       },
-      updateConfig: (imageCropper) => dispatch(updateWindow(windowId, { imageCropper })),
+      updateConfig: (imageCropper) =>
+        dispatch(updateWindow(windowId, { imageCropper })),
     }),
     mapStateToProps: (state, { windowId }) => ({
       config: getPluginConfig(state, { windowId }),
@@ -82,11 +90,11 @@ export default [
       currentCanvas: getCurrentCanvas(state, { windowId }),
       viewType: getWindowViewType(state, { windowId }),
     }),
-    mode: 'add',
+    mode: "add",
     reducers: {
       croppingRegions: croppingRegionsReducer,
     },
     saga: croppingRegionsSaga,
-    target: 'OpenSeadragonViewer',
+    target: "OpenSeadragonViewer",
   },
 ];
