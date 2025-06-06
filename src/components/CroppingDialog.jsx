@@ -1,25 +1,25 @@
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormLabel from "@material-ui/core/FormLabel";
-import Link from "@material-ui/core/Link";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import Slider from "@material-ui/core/Slider";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Switch from "@material-ui/core/Switch";
-import TextField from "@material-ui/core/TextField";
-import Typography from "@material-ui/core/Typography";
-import Alert from "@material-ui/lab/Alert";
-import Image from "material-ui-image";
+import Alert from "@mui/material/Alert";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import FormLabel from "@mui/material/FormLabel";
+import Link from "@mui/material/Link";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
+import Slider from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
+import Switch from "@mui/material/Switch";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 import ns from "mirador/dist/es/src/config/css-ns";
 import ScrollIndicatedDialogContent from "mirador/dist/es/src/containers/ScrollIndicatedDialogContent";
+import Image from "mui-image";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 
@@ -36,36 +36,34 @@ const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
   h: parseFloat(((h / height) * 100).toFixed(precision)),
 });
 
-const useStyles = makeStyles((theme) => ({
-  actions: {
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-  actionButtons: {
-    flexWrap: "wrap",
-  },
-  alert: {
-    marginBottom: theme.spacing(1),
-  },
-  legend: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  optionsHeading: {
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  },
-  previewHeading: {
-    marginBottom: theme.spacing(1),
-  },
-  previewImage: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  previewLink: {
-    fontFamily: theme.typography.fontFamily ?? "sans-serif",
-  },
+const StyledAlert = styled(Alert)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+}));
+const StyledDialogActions = styled(DialogActions)({
+  justifyContent: "space-between",
+  flexWrap: "wrap",
+});
+const StyledButtonGroup = styled(ButtonGroup)({
+  flexWrap: "wrap",
+});
+const StyledFormLabelLegend = styled(FormLabel)({
+  width: "100%",
+  display: "flex",
+  justifyContent: "space-between",
+});
+const StyledOptionsHeading = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+  marginTop: theme.spacing(1),
+}));
+const StyledPreviewHeading = styled(Typography)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+}));
+const StyledPreviewImage = styled(Image)(({ theme }) => ({
+  marginTop: theme.spacing(1),
+  marginBottom: theme.spacing(1),
+}));
+const StyledPreviewLink = styled(Link)(({ theme }) => ({
+  fontFamily: theme.typography.fontFamily ?? "sans-serif",
 }));
 
 const supportsClipboard = "clipboard" in navigator;
@@ -96,16 +94,6 @@ const CroppingDialog = ({
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
-  const {
-    actions,
-    actionButtons,
-    alert,
-    legend,
-    optionsHeading,
-    previewHeading,
-    previewImage,
-    previewLink,
-  } = useStyles();
   if (
     !enabled ||
     !active ||
@@ -116,11 +104,14 @@ const CroppingDialog = ({
   ) {
     return null;
   }
+
+  /** Close imagecropper dialog */
   const closeDialog = () =>
     updateConfig({
       ...config,
       dialogOpen: false,
     });
+
   const attribution = getAttributionString(requiredStatement);
   const canvasWidth = currentCanvas.getWidth();
   const canvasHeight = currentCanvas.getHeight();
@@ -133,15 +124,14 @@ const CroppingDialog = ({
   const region = `pct:${x},${y},${w},${h}`;
   const mirror = mirrored ? "!" : "";
   const imageUrl = `${imageServiceIds[0]}/${region}/pct:${size}/${mirror}${rotation}/${quality}.jpg`;
+  /**
+   * Generates a URL for the preview image based on the given width.
+   * @param {number} width - The width of the preview image.
+   * @returns {string} The generated URL for the preview image.
+   */
   const getPreviewUrl = (width) =>
     `${imageServiceIds[0]}/${region}/${width},/${mirror}${rotation}/${quality}.jpg`;
-  /* The aspect ratio, which depends on the rotation, is only relevant for the preview image */
-  let aspectRatio = 1;
-  if (imageCoordinates.h > 0 && [0, 180].includes(rotation)) {
-    aspectRatio = imageCoordinates.w / imageCoordinates.h;
-  } else if (imageCoordinates.w > 0 && [90, 270].includes(rotation)) {
-    aspectRatio = imageCoordinates.h / imageCoordinates.w;
-  }
+
   return (
     <Dialog
       container={document.querySelector(`#${containerId} .${ns("viewer")}`)}
@@ -151,7 +141,7 @@ const CroppingDialog = ({
       open={dialogOpen}
       scroll="paper"
     >
-      <DialogTitle disableTypography>
+      <DialogTitle>
         <Typography variant="h4">
           <Box fontWeight="fontWeightBold">
             {t("imageCropper.linkToSelectedRegion")}
@@ -160,14 +150,13 @@ const CroppingDialog = ({
       </DialogTitle>
       <ScrollIndicatedDialogContent dividers>
         {copiedToClipboard && (
-          <Alert
-            className={alert}
+          <StyledAlert
             closeText={t("imageCropper.close")}
             onClose={() => setCopiedToClipboard(false)}
             severity="success"
           >
             {t("imageCropper.copiedToClipboard")}
-          </Alert>
+          </StyledAlert>
         )}
         <TextField
           fullWidth
@@ -189,13 +178,13 @@ const CroppingDialog = ({
           value={imageUrl}
           variant="outlined"
         />
-        <Typography className={optionsHeading} variant="h5">
+        <StyledOptionsHeading variant="h5">
           {t("imageCropper.options")}
-        </Typography>
+        </StyledOptionsHeading>
         <FormControl component="fieldset" fullWidth>
-          <FormLabel component="legend" className={legend}>
+          <StyledFormLabelLegend component="legend">
             {t("imageCropper.size")} <span>{size}%</span>
-          </FormLabel>
+          </StyledFormLabelLegend>
           <Slider min={1} onChange={(_evt, s) => setSize(s)} value={size} />
         </FormControl>
         <FormControl component="fieldset">
@@ -255,27 +244,17 @@ const CroppingDialog = ({
             ))}
           </RadioGroup>
         </FormControl>
-        <Typography className={previewHeading} variant="h5">
+        <StyledPreviewHeading variant="h5">
           {t("imageCropper.preview.label")}
-        </Typography>
-        <Link
-          className={previewLink}
-          href={imageUrl}
-          rel="noopener"
-          target="_blank"
-        >
+        </StyledPreviewHeading>
+        <StyledPreviewLink href={imageUrl} rel="noopener" target="_blank">
           {t("imageCropper.preview.link")}
-        </Link>
-        <Image
-          aspectRatio={aspectRatio}
-          className={previewImage}
-          color="transparent"
-          src={getPreviewUrl(500)}
-        />
+        </StyledPreviewLink>
+        <StyledPreviewImage bgColor="transparent" src={getPreviewUrl(500)} />
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
       </ScrollIndicatedDialogContent>
-      <DialogActions className={actions}>
-        <ButtonGroup className={actionButtons}>
+      <StyledDialogActions>
+        <StyledButtonGroup>
           {["envelope", "facebook", "pinterest", "x", "whatsapp"].map((p) => (
             <ShareButton
               attribution={attribution}
@@ -287,11 +266,11 @@ const CroppingDialog = ({
               title={t(`imageCropper.share.${p}`)}
             />
           ))}
-        </ButtonGroup>
+        </StyledButtonGroup>
         <Button color="primary" onClick={closeDialog}>
           {t("imageCropper.close")}
         </Button>
-      </DialogActions>
+      </StyledDialogActions>
     </Dialog>
   );
 };

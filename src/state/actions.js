@@ -9,12 +9,10 @@ const PluginActionTypes = {
  * @param {Object} region - the region as {x,y,w,h}
  * @return the action
  */
-const setCroppingRegion = (windowId, region) => {
-  return {
-    region,
-    type: PluginActionTypes.SET_CROPPING_REGION,
-    windowId,
-  };
-};
+const setCroppingRegion = (windowId, region) => ({
+  region,
+  type: PluginActionTypes.SET_CROPPING_REGION,
+  windowId,
+});
 
 export { PluginActionTypes, setCroppingRegion };

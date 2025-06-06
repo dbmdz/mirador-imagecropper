@@ -1,5 +1,5 @@
-import InputAdornment from "@material-ui/core/InputAdornment";
-import FileCopyIcon from "@material-ui/icons/FileCopy";
+import FileCopyIcon from "@mui/icons-material/FileCopy";
+import InputAdornment from "@mui/material/InputAdornment";
 import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
 import PropTypes from "prop-types";
 import React from "react";
