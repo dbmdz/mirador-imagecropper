@@ -53,7 +53,7 @@
   },
   "peerDependencies": {
     "@material-ui/core": "4.x",
-    "@material-ui/icons": "4.x",
+    "@mui/icons-material": "5.x",
     "@material-ui/lab": "^4.0.0-alpha.61",
     "lodash": "4.x",
     "mirador": "3.x",
