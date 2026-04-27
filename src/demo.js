@@ -1,6 +1,6 @@
-import Mirador from "mirador/dist/es/src/index";
+import Mirador from "mirador";
 
-import imageCropperPlugin from "../../src";
+import imageCropperPlugin from ".";
 
 const config = {
   catalog: [
