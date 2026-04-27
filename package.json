@@ -9,8 +9,10 @@
     "mirador-plugin",
     "react-component"
   ],
-  "homepage": "",
-  "repository": "https://github.com/dbmdz/mirador-imagecropper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dbmdz/mirador-imagecropper.git"
+  },
   "license": "MIT",
   "author": "Matthias Lindinger <matthias.lindinger@bsb-muenchen.de>",
   "main": "dist/index.js",
