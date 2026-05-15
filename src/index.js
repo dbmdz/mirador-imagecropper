@@ -1,16 +1,14 @@
 import flatten from "lodash/flatten";
 import {
-  updateViewport,
-  updateWindow,
-} from "mirador/dist/es/src/state/actions";
-import {
   getContainerId,
   getCurrentCanvas,
   getCurrentCanvasWorld,
   getRequiredStatement,
   getRights,
   getWindowViewType,
-} from "mirador/dist/es/src/state/selectors";
+  updateViewport,
+  updateWindow,
+} from "mirador";
 
 import CroppingControls from "./components/CroppingControls";
 import CroppingDialog from "./components/CroppingDialog";

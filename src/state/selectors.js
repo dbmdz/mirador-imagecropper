@@ -1,7 +1,4 @@
-import {
-  getWindowConfig,
-  miradorSlice,
-} from "mirador/dist/es/src/state/selectors";
+import { getWindowConfig, miradorSlice } from "mirador";
 import { createSelector } from "reselect";
 
 const defaultConfig = {

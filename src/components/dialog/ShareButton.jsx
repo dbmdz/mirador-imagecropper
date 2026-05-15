@@ -2,9 +2,8 @@ import FacebookIcon from "@material-ui/icons/Facebook";
 import MailIcon from "@material-ui/icons/Mail";
 import PinterestIcon from "@material-ui/icons/Pinterest";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
+import { MiradorMenuButton } from "mirador";
 import PropTypes from "prop-types";
-import React from "react";
 
 import XIcon from "../icons/XIcon";
 import { getShareLink } from "../utils";
