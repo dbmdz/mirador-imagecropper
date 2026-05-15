@@ -1,5 +1,4 @@
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import ShareIcon from "@material-ui/icons/Share";
+import ShareIcon from "@mui/icons-material/Share";
 import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";

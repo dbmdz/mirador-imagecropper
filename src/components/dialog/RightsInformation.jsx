@@ -1,6 +1,5 @@
-import Link from "@material-ui/core/Link";
-import makeStyles from "@material-ui/core/styles/makeStyles";
-import Alert from "@material-ui/lab/Alert";
+import Alert from "@mui/material/Alert";
+import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({

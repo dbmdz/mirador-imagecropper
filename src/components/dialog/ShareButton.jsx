@@ -1,11 +1,11 @@
-import FacebookIcon from "@material-ui/icons/Facebook";
-import MailIcon from "@material-ui/icons/Mail";
-import PinterestIcon from "@material-ui/icons/Pinterest";
-import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import MailIcon from "@mui/icons-material/Mail";
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import WhatsAppIcon from "@mui/icons-material/WhatsApp";
+import XIcon from "@mui/icons-material/X";
 import { MiradorMenuButton } from "mirador";
 import PropTypes from "prop-types";
 
-import XIcon from "../icons/XIcon";
 import { getShareLink } from "../utils";
 
 const iconMapping = {
