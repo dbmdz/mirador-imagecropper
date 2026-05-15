@@ -1,5 +1,4 @@
 import { SvgIcon } from "@material-ui/core";
-import React from "react";
 
 /* FIXME: should not be needed anymore when upgrading to MUI 5, see https://github.com/mui/material-ui/pull/38811 */
 const XIcon = () => (

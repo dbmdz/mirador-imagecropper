@@ -1,9 +1,9 @@
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ShareIcon from "@material-ui/icons/Share";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
+import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Rnd } from "react-rnd";
 
 /** Converts the corner points of the image to coordinates in the browser */

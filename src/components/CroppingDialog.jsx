@@ -18,10 +18,9 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Alert from "@material-ui/lab/Alert";
 import Image from "material-ui-image";
-import ns from "mirador/dist/es/src/config/css-ns";
-import ScrollIndicatedDialogContent from "mirador/dist/es/src/containers/ScrollIndicatedDialogContent";
+import { ScrollIndicatedDialogContent } from "mirador";
 import PropTypes from "prop-types";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import CopyToClipboard from "./dialog/CopyToClipboard";
 import RightsInformation from "./dialog/RightsInformation";
@@ -144,7 +143,7 @@ const CroppingDialog = ({
   }
   return (
     <Dialog
-      container={document.querySelector(`#${containerId} .${ns("viewer")}`)}
+      container={document.querySelector(`#${containerId} .mirador-viewer}`)}
       fullWidth
       maxWidth="sm"
       onClose={closeDialog}

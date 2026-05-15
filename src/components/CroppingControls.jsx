@@ -1,7 +1,6 @@
 import CropIcon from "@material-ui/icons/Crop";
-import { MiradorMenuButton } from "mirador/dist/es/src/components/MiradorMenuButton";
+import { MiradorMenuButton } from "mirador";
 import PropTypes from "prop-types";
-import React from "react";
 
 /** Renders the button to (de)activate the cropping overlay */
 const CroppingControls = ({
