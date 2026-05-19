@@ -2,20 +2,13 @@ import Alert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
 /** Renders the rights information defined in the used manifest */
 const RightsInformation = ({ rights, t }) => {
-  const { root } = useStyles();
   if (!rights.length) {
     return null;
   }
   return (
-    <Alert className={root} severity="warning">
+    <Alert severity="warning" sx={{ mt: 2 }}>
       <span>{t("imageCropper.noteRights", { count: rights.length })}: </span>
       {rights.length === 1 ? (
         <Link href={rights[0]} rel="noopener" target="_blank">

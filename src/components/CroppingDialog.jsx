@@ -13,6 +13,7 @@ import Link from "@mui/material/Link";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import Slider from "@mui/material/Slider";
+import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -34,39 +35,12 @@ const toRelativeCoordinates = ({ x, y, w, h }, width, height, precision) => ({
   h: parseFloat(((h / height) * 100).toFixed(precision)),
 });
 
-const useStyles = makeStyles((theme) => ({
-  actions: {
-    justifyContent: "space-between",
-    flexWrap: "wrap",
-  },
-  actionButtons: {
-    flexWrap: "wrap",
-  },
-  alert: {
-    marginBottom: theme.spacing(1),
-  },
-  legend: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  optionsHeading: {
-    marginBottom: theme.spacing(1),
-    marginTop: theme.spacing(1),
-  },
-  previewHeading: {
-    marginBottom: theme.spacing(1),
-  },
-  previewImage: {
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1),
-  },
-  previewLink: {
-    fontFamily: theme.typography.fontFamily ?? "sans-serif",
-  },
-}));
-
 const supportsClipboard = "clipboard" in navigator;
+
+const StyledImage = styled(Image)(({ theme }) => ({
+  marginBottom: theme.spacing(1),
+  marginTop: theme.spacing(1),
+}));
 
 /** Renders the dialog where some IIIF parameters can be defined */
 const CroppingDialog = ({
@@ -94,16 +68,6 @@ const CroppingDialog = ({
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
-  const {
-    actions,
-    actionButtons,
-    alert,
-    legend,
-    optionsHeading,
-    previewHeading,
-    previewImage,
-    previewLink,
-  } = useStyles();
   if (
     !enabled ||
     !active ||
@@ -149,20 +113,18 @@ const CroppingDialog = ({
       open={dialogOpen}
       scroll="paper"
     >
-      <DialogTitle disableTypography>
-        <Typography variant="h4">
-          <Box fontWeight="fontWeightBold">
-            {t("imageCropper.linkToSelectedRegion")}
-          </Box>
-        </Typography>
+      <DialogTitle component="h4">
+        <Box fontWeight="fontWeightBold">
+          {t("imageCropper.linkToSelectedRegion")}
+        </Box>
       </DialogTitle>
       <ScrollIndicatedDialogContent dividers>
         {copiedToClipboard && (
           <Alert
-            className={alert}
             closeText={t("imageCropper.close")}
             onClose={() => setCopiedToClipboard(false)}
             severity="success"
+            sx={{ mb: 1 }}
           >
             {t("imageCropper.copiedToClipboard")}
           </Alert>
@@ -187,11 +149,18 @@ const CroppingDialog = ({
           value={imageUrl}
           variant="outlined"
         />
-        <Typography className={optionsHeading} variant="h5">
+        <Typography sx={{ mb: 1, mt: 1 }} variant="h5">
           {t("imageCropper.options")}
         </Typography>
         <FormControl component="fieldset" fullWidth>
-          <FormLabel component="legend" className={legend}>
+          <FormLabel
+            component="legend"
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              width: "100%",
+            }}
+          >
             {t("imageCropper.size")} <span>{size}%</span>
           </FormLabel>
           <Slider min={1} onChange={(_evt, s) => setSize(s)} value={size} />
@@ -253,27 +222,28 @@ const CroppingDialog = ({
             ))}
           </RadioGroup>
         </FormControl>
-        <Typography className={previewHeading} variant="h5">
+        <Typography sx={{ mb: 1 }} variant="h5">
           {t("imageCropper.preview.label")}
         </Typography>
         <Link
-          className={previewLink}
           href={imageUrl}
           rel="noopener"
+          sx={(theme) => ({
+            fontFamily: theme.typography.fontFamily ?? "sans-serif",
+          })}
           target="_blank"
         >
           {t("imageCropper.preview.link")}
         </Link>
-        <Image
+        <StyledImage
           aspectRatio={aspectRatio}
-          className={previewImage}
           color="transparent"
           src={getPreviewUrl(500)}
         />
         {showRightsInformation && <RightsInformation t={t} rights={rights} />}
       </ScrollIndicatedDialogContent>
-      <DialogActions className={actions}>
-        <ButtonGroup className={actionButtons}>
+      <DialogActions sx={{ flexWrap: "wrap", justifyContent: "space-between" }}>
+        <ButtonGroup sx={{ flexWrap: "wrap" }}>
           {["envelope", "facebook", "pinterest", "x", "whatsapp"].map((p) => (
             <ShareButton
               attribution={attribution}
