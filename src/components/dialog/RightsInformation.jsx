@@ -19,7 +19,7 @@ const RightsInformation = ({ rights }) => {
       ) : (
         <ul>
           {rights.map((link) => (
-            <li>
+            <li key={link}>
               <Link href={link} rel="noopener" target="_blank">
                 {link}
               </Link>
