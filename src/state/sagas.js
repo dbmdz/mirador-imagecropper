@@ -1,4 +1,4 @@
-import ActionTypes from "mirador";
+import { ActionTypes } from "mirador";
 import { put, takeEvery } from "redux-saga/effects";
 
 import { setCroppingRegion } from "./actions";
