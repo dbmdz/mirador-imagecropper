@@ -2,9 +2,11 @@ import FileCopyIcon from "@mui/icons-material/FileCopy";
 import InputAdornment from "@mui/material/InputAdornment";
 import { MiradorMenuButton } from "mirador";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 /** Renders the button for copying the image url to the clipboard */
-const CopyToClipboard = ({ onCopy, supported, t }) => {
+const CopyToClipboard = ({ onCopy, supported }) => {
+  const { t } = useTranslation();
   if (!supported) {
     return null;
   }
@@ -24,7 +26,6 @@ const CopyToClipboard = ({ onCopy, supported, t }) => {
 CopyToClipboard.propTypes = {
   onCopy: PropTypes.func.isRequired,
   supported: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default CopyToClipboard;

@@ -1,9 +1,11 @@
 import Alert from "@mui/material/Alert";
 import Link from "@mui/material/Link";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 /** Renders the rights information defined in the used manifest */
-const RightsInformation = ({ rights, t }) => {
+const RightsInformation = ({ rights }) => {
+  const { t } = useTranslation();
   if (!rights.length) {
     return null;
   }
@@ -31,7 +33,6 @@ const RightsInformation = ({ rights, t }) => {
 
 RightsInformation.propTypes = {
   rights: PropTypes.arrayOf(PropTypes.string).isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default RightsInformation;
