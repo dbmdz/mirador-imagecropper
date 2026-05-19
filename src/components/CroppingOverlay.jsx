@@ -4,6 +4,7 @@ import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Rnd } from "react-rnd";
 
 /** Converts the corner points of the image to coordinates in the browser */
@@ -98,7 +99,6 @@ const CroppingOverlay = ({
   currentCanvas,
   resetRotation,
   setCroppingRegion,
-  t,
   updateConfig,
   viewer,
   viewerConfig,
@@ -109,6 +109,7 @@ const CroppingOverlay = ({
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
   const [buttonOutside, setButtonOutside] = useState(true);
+  const { t } = useTranslation();
   useEffect(() => {
     if (isInitialRenderOfCanvas) {
       setButtonOutside(true);
@@ -263,7 +264,6 @@ CroppingOverlay.propTypes = {
   }),
   resetRotation: PropTypes.func.isRequired,
   setCroppingRegion: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   updateConfig: PropTypes.func.isRequired,
   viewer: PropTypes.shape({
     world: PropTypes.shape({

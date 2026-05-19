@@ -21,6 +21,7 @@ import { ScrollIndicatedDialogContent } from "mirador";
 import Image from "mui-image";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 import CopyToClipboard from "./dialog/CopyToClipboard";
 import RightsInformation from "./dialog/RightsInformation";
@@ -52,7 +53,6 @@ const CroppingDialog = ({
   label,
   requiredStatement,
   rights,
-  t,
   updateConfig,
   viewType,
 }) => {
@@ -68,6 +68,7 @@ const CroppingDialog = ({
   const [quality, setQuality] = useState("default");
   const [rotation, setRotation] = useState(0);
   const [size, setSize] = useState(100);
+  const { t } = useTranslation();
   if (
     !enabled ||
     !active ||
@@ -301,7 +302,6 @@ CroppingDialog.propTypes = {
     }),
   ),
   rights: PropTypes.arrayOf(PropTypes.string),
-  t: PropTypes.func.isRequired,
   updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
 };

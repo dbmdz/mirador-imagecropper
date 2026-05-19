@@ -1,16 +1,12 @@
 import CropIcon from "@mui/icons-material/Crop";
 import { MiradorMenuButton } from "mirador";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 
 /** Renders the button to (de)activate the cropping overlay */
-const CroppingControls = ({
-  config,
-  containerId,
-  t,
-  updateConfig,
-  viewType,
-}) => {
+const CroppingControls = ({ config, containerId, updateConfig, viewType }) => {
   const { active, enabled } = config;
+  const { t } = useTranslation();
   if (!enabled || viewType !== "single") {
     return null;
   }
@@ -41,7 +37,6 @@ CroppingControls.propTypes = {
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
   containerId: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
   updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
 };
