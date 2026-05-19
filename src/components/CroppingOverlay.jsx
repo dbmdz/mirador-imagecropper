@@ -1,4 +1,5 @@
 import ShareIcon from "@mui/icons-material/Share";
+import { styled } from "@mui/material/styles";
 import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
@@ -58,33 +59,35 @@ const toImageCoordinates = (image, { x, y, w, h }) => {
   };
 };
 
-const useStyles = makeStyles(() => ({
-  dialogButton: {
-    backgroundColor: "rgba(255,255,255,0.8) !important",
-    borderRadius: "25%",
-    color: "rgba(0, 0, 0, 0.54) !important",
-    left: "0",
-    position: ({ buttonOutside }) => buttonOutside && "absolute",
-    top: "5px",
-    transform: ({ buttonOutside }) =>
-      buttonOutside ? "translateX(calc(-100% - 5px))" : "translateX(5px)",
-  },
-  resizeHandle: {
-    background: "white",
-    border: "2px solid gray",
-    boxSizing: "border-box",
-    height: "50%",
-    left: "25%",
-    position: "absolute",
-    top: "25%",
-    width: "50%",
-  },
-  root: {
-    border: "1px dashed black",
-    boxShadow: "0 0 0 9999em rgba(0, 0, 0, 0.65)",
-    position: "absolute",
-    zIndex: "1",
-  },
+const StyledResizeHandle = styled("div")({
+  background: "white",
+  border: "2px solid gray",
+  boxSizing: "border-box",
+  height: "50%",
+  left: "25%",
+  position: "absolute",
+  top: "25%",
+  width: "50%",
+});
+
+const StyledRnd = styled(Rnd)({
+  border: "1px dashed black",
+  boxShadow: "0 0 0 9999em rgba(0, 0, 0, 0.65)",
+  position: "absolute",
+  zIndex: "1",
+});
+
+const StyledShareButton = styled(MiradorMenuButton, {
+  shouldForwardProp: (prop) => prop !== "buttonOutside",
+})(({ buttonOutside }) => ({
+  backgroundColor: "rgba(255,255,255,0.8) !important",
+  borderRadius: "25%",
+  color: "rgba(0, 0, 0, 0.54) !important",
+  left: "0",
+  top: "5px",
+  ...(buttonOutside
+    ? { position: "absolute", transform: "translateX(calc(-100% - 5px))" }
+    : { transform: "translateX(5px)" }),
 }));
 
 /** Renders the overlay used for defining the cropping region by dragging and resizing */
@@ -106,7 +109,6 @@ const CroppingOverlay = ({
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
   const [buttonOutside, setButtonOutside] = useState(true);
-  const { dialogButton, resizeHandle, root } = useStyles({ buttonOutside });
   useEffect(() => {
     if (isInitialRenderOfCanvas) {
       setButtonOutside(true);
@@ -143,12 +145,10 @@ const CroppingOverlay = ({
       getInitialRegion(currentImage, canvasWidth, canvasHeight),
     );
   }
-  const ResizeHandle = <div className={resizeHandle} />;
   return (
-    <Rnd
+    <StyledRnd
       bounds="parent"
-      cancel={`.${dialogButton.split(" ")[0]}`}
-      className={root}
+      //cancel={`.${dialogButton.split(" ")[0]}`}
       minHeight={50}
       minWidth={50}
       onDrag={(_evt, { x, y }) => {
@@ -206,20 +206,19 @@ const CroppingOverlay = ({
         y: croppingRegion.y,
       }}
       resizeHandleComponent={{
-        bottomLeft: ResizeHandle,
-        bottomRight: ResizeHandle,
-        topLeft: ResizeHandle,
-        topRight: ResizeHandle,
+        bottomLeft: StyledResizeHandle,
+        bottomRight: StyledResizeHandle,
+        topLeft: StyledResizeHandle,
+        topRight: StyledResizeHandle,
       }}
       size={{
         height: croppingRegion.h,
         width: croppingRegion.w,
       }}
     >
-      <MiradorMenuButton
+      <StyledShareButton
         aria-expanded={dialogOpen}
         aria-label={t("imageCropper.openDialog")}
-        className={dialogButton}
         containerId={containerId}
         onClick={() => {
           setCroppingRegion({
@@ -231,10 +230,11 @@ const CroppingOverlay = ({
           });
         }}
         size="small"
+        buttonOutside={buttonOutside}
       >
         <ShareIcon />
-      </MiradorMenuButton>
-    </Rnd>
+      </StyledShareButton>
+    </StyledRnd>
   );
 };
 
