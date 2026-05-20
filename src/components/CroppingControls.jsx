@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { useTranslation } from "react-i18next";
 
 /** Renders the button to (de)activate the cropping overlay */
-const CroppingControls = ({ config, containerId, updateConfig, viewType }) => {
+const CroppingControls = ({ config, updateConfig, viewType }) => {
   const { active, enabled } = config;
   const { t } = useTranslation();
   if (!enabled || viewType !== "single") {
@@ -18,7 +18,6 @@ const CroppingControls = ({ config, containerId, updateConfig, viewType }) => {
         active ? t("imageCropper.deactivate") : t("imageCropper.activate")
       }
       color={active ? "primary" : "default"}
-      containerId={containerId}
       onClick={() =>
         updateConfig({
           ...config,
@@ -36,7 +35,6 @@ CroppingControls.propTypes = {
     active: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
-  containerId: PropTypes.string.isRequired,
   updateConfig: PropTypes.func.isRequired,
   viewType: PropTypes.string.isRequired,
 };
