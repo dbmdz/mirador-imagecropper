@@ -206,10 +206,10 @@ const CroppingOverlay = ({
         y: croppingRegion.y,
       }}
       resizeHandleComponent={{
-        bottomLeft: StyledResizeHandle,
-        bottomRight: StyledResizeHandle,
-        topLeft: StyledResizeHandle,
-        topRight: StyledResizeHandle,
+        bottomLeft: <StyledResizeHandle />,
+        bottomRight: <StyledResizeHandle />,
+        topLeft: <StyledResizeHandle />,
+        topRight: <StyledResizeHandle />,
       }}
       size={{
         height: croppingRegion.h,
