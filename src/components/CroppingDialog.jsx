@@ -107,7 +107,7 @@ const CroppingDialog = ({
   }
   return (
     <Dialog
-      container={document.querySelector(`#${containerId} .mirador-viewer}`)}
+      container={document.querySelector(`#${containerId} .mirador-viewer`)}
       fullWidth
       maxWidth="sm"
       onClose={closeDialog}
