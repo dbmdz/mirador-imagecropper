@@ -94,7 +94,6 @@ const StyledShareButton = styled(MiradorMenuButton, {
 /** Renders the overlay used for defining the cropping region by dragging and resizing */
 const CroppingOverlay = ({
   config,
-  containerId,
   croppingRegion,
   currentCanvas,
   resetRotation,
@@ -220,7 +219,6 @@ const CroppingOverlay = ({
       <StyledShareButton
         aria-expanded={dialogOpen}
         aria-label={t("imageCropper.openDialog")}
-        containerId={containerId}
         onClick={() => {
           setCroppingRegion({
             imageCoordinates: toImageCoordinates(currentImage, croppingRegion),
@@ -251,7 +249,6 @@ CroppingOverlay.propTypes = {
     dialogOpen: PropTypes.bool.isRequired,
     enabled: PropTypes.bool.isRequired,
   }).isRequired,
-  containerId: PropTypes.string.isRequired,
   croppingRegion: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,

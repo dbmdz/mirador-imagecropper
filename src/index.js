@@ -31,7 +31,6 @@ export default [
     }),
     mapStateToProps: (state, { windowId }) => ({
       config: getPluginConfig(state, { windowId }),
-      containerId: getContainerId(state),
       viewType: getWindowViewType(state, { windowId }),
     }),
     mode: "add",
@@ -83,7 +82,6 @@ export default [
     }),
     mapStateToProps: (state, { windowId }) => ({
       config: getPluginConfig(state, { windowId }),
-      containerId: getContainerId(state),
       croppingRegion: getCroppingRegionForWindow(state, { windowId }),
       currentCanvas: getCurrentCanvas(state, { windowId }),
       viewType: getWindowViewType(state, { windowId }),
