@@ -45,10 +45,6 @@ const ShareButton = ({
   );
 };
 
-ShareButton.defaultProps = {
-  attribution: undefined,
-};
-
 ShareButton.propTypes = {
   attribution: PropTypes.string,
   imageUrl: PropTypes.string.isRequired,
