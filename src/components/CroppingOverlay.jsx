@@ -237,12 +237,6 @@ const CroppingOverlay = ({
   );
 };
 
-CroppingOverlay.defaultProps = {
-  currentCanvas: undefined,
-  viewer: undefined,
-  viewerConfig: undefined,
-};
-
 CroppingOverlay.propTypes = {
   config: PropTypes.shape({
     active: PropTypes.bool.isRequired,

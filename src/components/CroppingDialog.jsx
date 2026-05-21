@@ -50,9 +50,9 @@ const CroppingDialog = ({
   croppingRegion: { imageCoordinates },
   currentCanvas,
   imageServiceIds,
-  label,
-  requiredStatement,
-  rights,
+  label = "",
+  requiredStatement = [],
+  rights = [],
   updateConfig,
   viewType,
 }) => {
@@ -263,13 +263,6 @@ const CroppingDialog = ({
       </DialogActions>
     </Dialog>
   );
-};
-
-CroppingDialog.defaultProps = {
-  currentCanvas: undefined,
-  label: "",
-  requiredStatement: [],
-  rights: [],
 };
 
 CroppingDialog.propTypes = {
