@@ -11,7 +11,7 @@ const CopyToClipboard = ({ onCopy, supported }) => {
     return null;
   }
   return (
-    <InputAdornment>
+    <InputAdornment position="end">
       <MiradorMenuButton
         aria-label={t("imageCropper.copyToClipboard")}
         edge="end"
