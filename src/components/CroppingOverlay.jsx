@@ -7,13 +7,23 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Rnd } from "react-rnd";
 
+/** FIXME: Nasty workaround because an instanceof check in imageToViewerElementCoordinates does not work at the moment */
+const _imageToViewerElementCoordinates = (image, x, y) => {
+  const point = image.imageToViewportCoordinates(x, y);
+  return image.viewport.pixelFromPoint(point, true);
+};
+
+/** FIXME: Nasty workaround because an instanceof check in imageToViewerElementCoordinates does not work at the moment */
+const _viewerElementToImageCoordinates = (image, x, y) => {
+  const point = image.viewport.pointFromPixel(new Point(x, y), true);
+  return image.viewportToImageCoordinates(point.x, point.y);
+};
+
 /** Converts the corner points of the image to coordinates in the browser */
 const getImageBounds = (image, width, height) => {
-  const topLeft = image.imageToViewerElementCoordinates(new Point(0, 0));
-  const topRight = image.imageToViewerElementCoordinates(new Point(width, 0));
-  const bottomLeft = image.imageToViewerElementCoordinates(
-    new Point(0, height),
-  );
+  const topLeft = _imageToViewerElementCoordinates(image, 0, 0);
+  const topRight = _imageToViewerElementCoordinates(image, width, 0);
+  const bottomLeft = _imageToViewerElementCoordinates(image, 0, height);
   return {
     x: Math.ceil(topLeft.x),
     y: Math.ceil(topLeft.y),
@@ -49,9 +59,9 @@ const isInsideImage = (bounds, { x, y, w, h }) => {
 
 /** Converts the given region in browser coordinates to image coordinates */
 const toImageCoordinates = (image, { x, y, w, h }) => {
-  const topLeft = image.viewerElementToImageCoordinates(new Point(x, y));
-  const topRight = image.viewerElementToImageCoordinates(new Point(x + w, y));
-  const bottomLeft = image.viewerElementToImageCoordinates(new Point(x, y + h));
+  const topLeft = _viewerElementToImageCoordinates(image, x, y);
+  const topRight = _viewerElementToImageCoordinates(image, x + w, y);
+  const bottomLeft = _viewerElementToImageCoordinates(image, x, y + h);
   return {
     x: Math.ceil(topLeft.x),
     y: Math.ceil(topLeft.y),
