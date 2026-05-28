@@ -112,6 +112,7 @@ const CroppingOverlay = ({
   viewer,
   viewerConfig,
   viewType,
+  windowId,
 }) => {
   const { active, dialogOpen, enabled } = config;
   const isInitialRenderOfCanvas = Object.entries(croppingRegion)
@@ -149,10 +150,11 @@ const CroppingOverlay = ({
       getInitialRegion(currentImage, canvasWidth, canvasHeight),
     );
   }
+  const buttonId = `${windowId}-share-region`;
   return (
     <StyledRnd
       bounds="parent"
-      //cancel={`.${dialogButton.split(" ")[0]}`}
+      cancel={`#${buttonId}`}
       minHeight={50}
       minWidth={50}
       onDrag={(_evt, { x, y }) => {
@@ -205,6 +207,7 @@ const CroppingOverlay = ({
       <StyledShareButton
         aria-expanded={dialogOpen}
         aria-label={t("imageCropper.shareLinkToSelectedRegion")}
+        id={buttonId}
         onClick={() => {
           setCroppingRegion({
             imageCoordinates: toImageCoordinates(currentImage, croppingRegion),
@@ -254,6 +257,7 @@ CroppingOverlay.propTypes = {
     rotation: PropTypes.number.isRequired,
   }),
   viewType: PropTypes.string.isRequired,
+  windowId: PropTypes.string.isRequired,
 };
 
 export default CroppingOverlay;
