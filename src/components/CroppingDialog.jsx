@@ -116,7 +116,7 @@ const CroppingDialog = ({
     >
       <DialogTitle component="h4">
         <Box fontWeight="fontWeightBold">
-          {t("imageCropper.linkToSelectedRegion")}
+          {t("imageCropper.shareLinkToSelectedRegion")}
         </Box>
       </DialogTitle>
       <ScrollIndicatedDialogContent dividers>
