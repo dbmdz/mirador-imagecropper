@@ -95,6 +95,7 @@ const StyledShareButton = styled(MiradorMenuButton, {
   borderRadius: "25%",
   color: "rgba(0, 0, 0, 0.54) !important",
   left: "0",
+  padding: "5px",
   top: "5px",
   ...(buttonOutside
     ? { position: "absolute", transform: "translateX(calc(-100% - 5px))" }
@@ -238,7 +239,6 @@ const CroppingOverlay = ({
             dialogOpen: true,
           });
         }}
-        size="small"
         buttonOutside={buttonOutside}
       >
         <ShareIcon />
