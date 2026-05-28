@@ -3,7 +3,6 @@ import { styled } from "@mui/material/styles";
 import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Rnd } from "react-rnd";
 
@@ -118,13 +117,7 @@ const CroppingOverlay = ({
   const isInitialRenderOfCanvas = Object.entries(croppingRegion)
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
-  const [buttonOutside, setButtonOutside] = useState(true);
   const { t } = useTranslation();
-  useEffect(() => {
-    if (isInitialRenderOfCanvas) {
-      setButtonOutside(true);
-    }
-  }, [isInitialRenderOfCanvas]);
   if (
     !enabled ||
     !active ||
@@ -176,15 +169,6 @@ const CroppingOverlay = ({
           })
         ) {
           setCroppingRegion({ x, y });
-          /*
-           * Put the button inside the overlay if it would be cut off by the window borders
-           * (35 is the width of the button)
-           */
-          if (x <= 35) {
-            setButtonOutside(false);
-          } else {
-            setButtonOutside(true);
-          }
         }
       }}
       onResize={(
@@ -201,15 +185,6 @@ const CroppingOverlay = ({
         );
         if (isInsideImage(imageBounds, { x, y, w, h })) {
           setCroppingRegion({ x, y, w, h });
-          /*
-           * Put the button inside the overlay if it would be cut off by the window borders
-           * (35 is the width of the button)
-           */
-          if (x <= 35) {
-            setButtonOutside(false);
-          } else {
-            setButtonOutside(true);
-          }
         }
       }}
       position={{
@@ -239,7 +214,11 @@ const CroppingOverlay = ({
             dialogOpen: true,
           });
         }}
-        buttonOutside={buttonOutside}
+        /*
+         * Put the button inside the overlay if it would be cut off by the window borders
+         * (40 is the width of the button)
+         */
+        buttonOutside={croppingRegion.x > 40}
       >
         <ShareIcon />
       </StyledShareButton>
