@@ -229,7 +229,7 @@ const CroppingOverlay = ({
     >
       <StyledShareButton
         aria-expanded={dialogOpen}
-        aria-label={t("imageCropper.openDialog")}
+        aria-label={t("imageCropper.shareLinkToSelectedRegion")}
         onClick={() => {
           setCroppingRegion({
             imageCoordinates: toImageCoordinates(currentImage, croppingRegion),
