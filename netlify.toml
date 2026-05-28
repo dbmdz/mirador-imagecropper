@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build:demo"
+  publish = "demo/dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  NPM_VERSION = "11"
