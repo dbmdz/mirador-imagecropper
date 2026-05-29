@@ -21,6 +21,14 @@ import { croppingRegionsReducer } from "./state/reducers";
 import croppingRegionsSaga from "./state/sagas";
 import { getCroppingRegionForWindow, getPluginConfig } from "./state/selectors";
 
+/*
+ * FIXME: there seems to be a bug in Mirador, that viewerConfig is null in certain situations:
+ * when changing the view type, viewerConfig will be null, see https://github.com/ProjectMirador/mirador/blob/master/src/state/reducers/viewers.js#L20-L21
+ * only on the first page it doesn't get reset to a valid object, on all other pages there is no problem
+ */
+const getViewerConfig = (state, windowId) =>
+  getViewer(state, { windowId }) ?? {};
+
 export default [
   {
     component: CroppingControls,
@@ -87,7 +95,7 @@ export default [
       config: getPluginConfig(state, { windowId }),
       croppingRegion: getCroppingRegionForWindow(state, { windowId }),
       currentCanvas: getCurrentCanvas(state, { windowId }),
-      viewerConfig: getViewer(state, { windowId }),
+      viewerConfig: getViewerConfig(state, windowId),
       viewType: getWindowViewType(state, { windowId }),
       windowId,
     }),
