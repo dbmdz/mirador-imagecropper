@@ -3,6 +3,7 @@ import { styled } from "@mui/material/styles";
 import { MiradorMenuButton } from "mirador";
 import { Point } from "openseadragon";
 import PropTypes from "prop-types";
+import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Rnd } from "react-rnd";
 
@@ -119,6 +120,23 @@ const CroppingOverlay = ({
     .filter(([k]) => k !== "imageCoordinates")
     .every(([, v]) => v === 0);
   const { t } = useTranslation();
+  const canvasWidth = currentCanvas?.getWidth();
+  const canvasHeight = currentCanvas?.getHeight();
+  const currentImage = viewer?.world?.getItemAt(0);
+  useEffect(() => {
+    /* Set initial region dependant on the current image if this is the initial render for the canvas */
+    if (currentImage && isInitialRenderOfCanvas) {
+      setCroppingRegion(
+        getInitialRegion(currentImage, canvasWidth, canvasHeight),
+      );
+    }
+  }, [
+    canvasHeight,
+    canvasWidth,
+    currentImage,
+    isInitialRenderOfCanvas,
+    setCroppingRegion,
+  ]);
   if (
     !enabled ||
     !active ||
@@ -140,15 +158,6 @@ const CroppingOverlay = ({
    */
   if (rotation !== 0) {
     resetRotation();
-  }
-  const canvasWidth = currentCanvas.getWidth();
-  const canvasHeight = currentCanvas.getHeight();
-  const currentImage = viewer.world.getItemAt(0);
-  /* Set initial region dependant on the current image if this is the initial render for the canvas */
-  if (currentImage && isInitialRenderOfCanvas) {
-    setCroppingRegion(
-      getInitialRegion(currentImage, canvasWidth, canvasHeight),
-    );
   }
   const buttonId = `${windowId}-share-region`;
   return (
