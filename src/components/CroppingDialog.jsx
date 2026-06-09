@@ -141,7 +141,6 @@ const CroppingDialog = ({
                   setTimeout(() => setCopiedToClipboard(false), 3000);
                 }}
                 supported={supportsClipboard}
-                t={t}
               />
             ),
             readOnly: true,
@@ -241,7 +240,7 @@ const CroppingDialog = ({
           color="transparent"
           src={getPreviewUrl(500)}
         />
-        {showRightsInformation && <RightsInformation t={t} rights={rights} />}
+        {showRightsInformation && <RightsInformation rights={rights} />}
       </ScrollIndicatedDialogContent>
       <DialogActions sx={{ flexWrap: "wrap", justifyContent: "space-between" }}>
         <ButtonGroup sx={{ flexWrap: "wrap" }}>
