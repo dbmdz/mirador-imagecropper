@@ -1,11 +1,11 @@
 {
   "name": "mirador-imagecropper",
   "version": "0.1.9",
-  "description": "Mirador 3 plugin to retrieve the image url for the selected area",
+  "description": "Mirador 4 plugin to retrieve the image url for the selected area",
   "keywords": [
     "iiif",
     "mirador",
-    "mirador3",
+    "mirador4",
     "mirador-plugin",
     "react-component"
   ],
