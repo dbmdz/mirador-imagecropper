@@ -23,7 +23,7 @@ import { getCroppingRegionForWindow, getPluginConfig } from "./state/selectors";
 
 /*
  * FIXME: there seems to be a bug in Mirador, that viewerConfig is null in certain situations:
- * when changing the view type, viewerConfig will be null, see https://github.com/ProjectMirador/mirador/blob/master/src/state/reducers/viewers.js#L20-L21
+ * when changing the view type, viewerConfig will be null, see https://github.com/ProjectMirador/mirador/blob/v4.0.0/src/state/reducers/viewers.js#L30-L31
  * only on the first page it doesn't get reset to a valid object, on all other pages there is no problem
  */
 const getViewerConfig = (state, windowId) =>
