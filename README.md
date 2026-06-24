@@ -3,7 +3,7 @@
 [![npm package][npm-badge]][npm]
 [![required Mirador version][mirador-badge]][mirador]
 
-A Mirador 3 plugin to retrieve the image url for the selected area.
+A Mirador 4 plugin to retrieve the image url for the selected area.
 
 ![Screenshot1][screenshot1]
 ![Screenshot2][screenshot2]
@@ -74,8 +74,8 @@ starting the work, so we can discuss if it's a fit.
 **Note**: The package requires Node.js `16` and npm in major version `8`.
 
 [demo-cfg]: https://github.com/dbmdz/mirador-imagecropper/blob/main/demo/src/index.js#L5-L52
-[mirador]: https://github.com/ProjectMirador/mirador/releases/tag/v3.1.1
-[mirador-badge]: https://img.shields.io/badge/Mirador-%E2%89%A53.1.1-blueviolet
+[mirador]: https://github.com/ProjectMirador/mirador/releases/tag/v4.0.0
+[mirador-badge]: https://img.shields.io/badge/Mirador-%E2%89%A54.0.0-blueviolet
 [npm]: https://www.npmjs.org/package/mirador-imagecropper
 [npm-badge]: https://img.shields.io/npm/v/mirador-imagecropper.png?style=flat-square
 [screenshot1]: .docassets/screenshot1.png
