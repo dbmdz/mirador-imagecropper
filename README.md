@@ -71,7 +71,7 @@ contributions :-)
 For larger changes/features, it's usually wise to open an issue before
 starting the work, so we can discuss if it's a fit.
 
-**Note**: The package requires Node.js `16` and npm in major version `8`.
+**Note**: The package requires Node.js `24` and npm in major version `11`.
 
 [demo-cfg]: https://github.com/dbmdz/mirador-imagecropper/blob/main/demo/src/index.js#L5-L52
 [mirador]: https://github.com/ProjectMirador/mirador/releases/tag/v4.0.0
