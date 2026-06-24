@@ -7,13 +7,23 @@ import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Rnd } from "react-rnd";
 
-/** FIXME: Nasty workaround because an instanceof check in imageToViewerElementCoordinates does not work at the moment */
+/**
+ * FIXME: It seems as though there are two instances of OpenSeadragon.
+ * This results in the instanceof check for Point in imageToViewportCoordinates not working.
+ * As a workaround, we copy the content of imageToViewerElementCoordinates, with the difference being
+ * that we call imageToViewportCoordinates directly with x and y coordinates instead of a Point instance.
+ */
 const _imageToViewerElementCoordinates = (image, x, y) => {
   const point = image.imageToViewportCoordinates(x, y);
   return image.viewport.pixelFromPoint(point, true);
 };
 
-/** FIXME: Nasty workaround because an instanceof check in imageToViewerElementCoordinates does not work at the moment */
+/**
+ * FIXME: It seems as though there are two instances of OpenSeadragon.
+ * This results in the instanceof check for Point in viewportToImageCoordinates not working.
+ * As a workaround, we copy the content of viewerElementToImageCoordinates, with the difference being
+ * that we call viewportToImageCoordinates directly with x and y coordinates instead of a Point instance.
+ */
 const _viewerElementToImageCoordinates = (image, x, y) => {
   const point = image.viewport.pointFromPixel(new Point(x, y), true);
   return image.viewportToImageCoordinates(point.x, point.y);
