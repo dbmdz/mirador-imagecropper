@@ -1,6 +1,6 @@
 {
   "name": "mirador-imagecropper",
-  "version": "0.1.9",
+  "version": "1.0.0",
   "description": "Mirador 4 plugin to retrieve the image url for the selected area",
   "keywords": [
     "iiif",

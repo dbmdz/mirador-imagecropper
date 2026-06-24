@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## Unreleased
 
+## [1.0.0](https://github.com/dbmdz/mirador-imagecropper/releases/tag/1.0.0) - 2026-06-24
+
 ### Changed
 
 - **Breaking**: Upgrade to Mirador 4
