@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## Unreleased
 
+### Fixed
+
+- Fixed a crash when moving the crop selection in webpack 5/browser consumers without a `process` global.
+
 ## [1.0.0](https://github.com/dbmdz/mirador-imagecropper/releases/tag/1.0.0) - 2026-06-24
 
 ### Changed

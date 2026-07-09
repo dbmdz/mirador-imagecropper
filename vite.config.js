@@ -27,6 +27,13 @@ const pluginConfig = {
       },
     },
   },
+  // react-draggable is bundled into the published library via react-rnd, and
+  // reads process.env.DRAGGABLE_DEBUG during drag start. Vite lib builds leave
+  // that reference intact, which crashes in webpack 5/browser consumers without
+  // a `process` global. Replace the debug flag at build time.
+  define: {
+    "process.env.DRAGGABLE_DEBUG": "false",
+  },
   plugins: [react()],
   server: {
     open: true,
