@@ -27,6 +27,7 @@ const pluginConfig = {
       },
     },
   },
+  // FIXME: remove this as soon https://github.com/react-grid-layout/react-draggable/issues/806 is fixed
   // react-draggable is bundled into the published library via react-rnd, and
   // reads process.env.DRAGGABLE_DEBUG during drag start. Vite lib builds leave
   // that reference intact, which crashes in webpack 5/browser consumers without
