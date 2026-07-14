@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) 
 
 ## Unreleased
 
+## [1.0.1](https://github.com/dbmdz/mirador-imagecropper/releases/tag/1.0.1) - 2026-07-14
+
 ### Fixed
 
 - Fixed a crash when moving the crop selection in webpack 5/browser consumers without a `process` global.
