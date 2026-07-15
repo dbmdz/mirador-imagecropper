@@ -51,7 +51,7 @@ const miradorConfig = {
 }
 ```
 
-You can view an example configuration in [demo/src/index.js][demo-cfg].
+You can view an example configuration in [src/demo.js][demo-cfg].
 
 The available settings are:
 
@@ -73,7 +73,7 @@ starting the work, so we can discuss if it's a fit.
 
 **Note**: The package requires Node.js `24` and npm in major version `11`.
 
-[demo-cfg]: https://github.com/dbmdz/mirador-imagecropper/blob/main/demo/src/index.js#L5-L52
+[demo-cfg]: https://github.com/dbmdz/mirador-imagecropper/blob/main/src/demo.js
 [mirador]: https://github.com/ProjectMirador/mirador/releases/tag/v4.0.0
 [mirador-badge]: https://img.shields.io/badge/Mirador-%E2%89%A54.0.0-blueviolet
 [npm]: https://www.npmjs.org/package/mirador-imagecropper
