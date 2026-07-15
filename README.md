@@ -16,8 +16,8 @@ from npm with `npm install mirador-imagecropper`, import it into your project
 and pass it to Mirador when you instantiate the viewer:
 
 ```javascript
-import Mirador from 'mirador/dist/es/src/index';
-import imageCropperPlugin from 'mirador-imagecropper/es';
+import Mirador from 'mirador';
+import imageCropperPlugin from 'mirador-imagecropper';
 
 const miradorConfig = {
   // Your Mirador configuration
