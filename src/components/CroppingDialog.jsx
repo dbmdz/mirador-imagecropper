@@ -17,7 +17,7 @@ import { styled } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { ScrollIndicatedDialogContent } from "mirador";
+import { cssNs, ScrollIndicatedDialogContent } from "mirador";
 import Image from "mui-image";
 import PropTypes from "prop-types";
 import { useState } from "react";
@@ -107,7 +107,7 @@ const CroppingDialog = ({
   }
   return (
     <Dialog
-      container={document.querySelector(`#${containerId} .mirador-viewer`)}
+      container={document.querySelector(`#${containerId} .${cssNs("viewer")}`)}
       fullWidth
       maxWidth="sm"
       onClose={closeDialog}
