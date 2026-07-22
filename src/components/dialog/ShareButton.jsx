@@ -36,7 +36,7 @@ const ShareButton = ({
   return (
     <MiradorMenuButton
       aria-label={title}
-      href={encodeURI(link)}
+      href={link}
       rel="noopener"
       target="_blank"
     >

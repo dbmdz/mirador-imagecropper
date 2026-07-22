@@ -10,6 +10,32 @@ const getAttributionString = (requiredStatement) => {
   );
 };
 
+const getFacebookLink = (text, imageUrl) => {
+  const url = new URL("/sharer/sharer.php", "https://www.facebook.com");
+  url.searchParams.set("title", text);
+  url.searchParams.set("u", imageUrl);
+  return url.toString();
+};
+
+const getPinterestLink = (text, imageUrl, thumbnailUrl) => {
+  const url = new URL("/pin/create/bookmarklet", "https://pinterest.com");
+  url.searchParams.set("description", text);
+  url.searchParams.set("url", imageUrl);
+  url.searchParams.set("media", thumbnailUrl);
+  return url.toString();
+};
+
+const getXLink = (text, imageUrl) => {
+  const url = new URL("/intent/post", "https://x.com");
+  url.searchParams.set(
+    "text",
+    text.length > 60 ? `${text.substring(0, 60)}...` : text,
+  );
+  url.searchParams.set("url", imageUrl);
+  url.searchParams.set("hashtags", "iiif");
+  return url.toString();
+};
+
 /** Constructs a share link for the given content and provider */
 const getShareLink = (attribution, imageUrl, label, provider, thumbnailUrl) => {
   let text = label;
@@ -20,15 +46,13 @@ const getShareLink = (attribution, imageUrl, label, provider, thumbnailUrl) => {
     case "envelope":
       return `mailto:?subject=${text}&body=${text}: ${imageUrl}`;
     case "facebook":
-      return `https://www.facebook.com/sharer/sharer.php?title=${text}&u=${imageUrl}`;
+      return getFacebookLink(text, imageUrl);
     case "pinterest":
-      return `http://pinterest.com/pin/create/bookmarklet/?url=${imageUrl}&description=${text}&media=${thumbnailUrl}`;
+      return getPinterestLink(text, imageUrl, thumbnailUrl);
     case "whatsapp":
       return `whatsapp://send?text=${text}: ${imageUrl}`;
     case "x":
-      return `https://x.com/intent/post?text=${
-        text.length > 60 ? `${text.substring(0, 60)}...` : text
-      }&url=${imageUrl}&hashtags=iiif`;
+      return getXLink(text, imageUrl);
     default:
       return null;
   }
